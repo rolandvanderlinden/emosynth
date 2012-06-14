@@ -7,6 +7,11 @@ import javax.swing.JPanel;
 
 import util.Output;
 
+import com.sun.speech.freetts.Voice;
+import com.sun.speech.freetts.VoiceManager;
+
+import controller.tts.Speaker;
+
 public class EmoSynthApplet extends JApplet
 {
 	// **********************************************
@@ -66,6 +71,11 @@ public class EmoSynthApplet extends JApplet
 	public void start()
 	{
 		Output.show();
+		
+		//Test the FreeTTS text-to-speech capabilities.
+		Voice voice = VoiceManager.getInstance().getVoice(Config.freeTTSSpeakerName);
+		Speaker speaker = new Speaker(Config.freeTTSSpeakerName, voice);
+		speaker.say("Hello! Welcome to the unfinished EmoSynth application.");
 	}
 	
 	/**

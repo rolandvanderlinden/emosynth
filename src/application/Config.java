@@ -11,4 +11,6 @@ public class Config
 {
 	public final static String appname = "Emotional Synthesizer [PLACEHOLDER]";
 	public final static Dimension appsize = new Dimension(500, 500);
+	
+	public final static String freeTTSSpeakerName = "kevin16";
 }
