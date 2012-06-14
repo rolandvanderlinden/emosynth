@@ -1,11 +1,15 @@
 package application;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 import javax.swing.JApplet;
 import javax.swing.JPanel;
 
 import util.Output;
+import view.mainparts.AMainPanel;
+import view.mainparts.ButtonTextPanel;
+import view.mainparts.SliderTextPanel;
 
 import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
@@ -18,7 +22,7 @@ public class EmoSynthApplet extends JApplet
 	// Fields
 	// **********************************************
 	
-	public JPanel mainpanel;
+	public JPanel rootpanel;
 	
 	
 	// **********************************************
@@ -36,6 +40,9 @@ public class EmoSynthApplet extends JApplet
 			
 			//Create the basic layout of the applet.
 			this.createBasicLayout();
+			
+			//Insert the panels that allow TTS interaction into the applet.
+			this.insertPanels();
 		}
 		catch(Exception e)
 		{
@@ -53,11 +60,41 @@ public class EmoSynthApplet extends JApplet
 		this.setSize(Config.appsize);
 
 		//Insert the most basic background panel into the applet.
-		this.mainpanel = new JPanel(null);
-		this.mainpanel.setSize(Config.appsize);
-		this.mainpanel.setBackground(Color.white);
-		this.mainpanel.setLocation(0, 0);
-		this.add(this.mainpanel);
+		this.rootpanel = new JPanel(null);
+		this.rootpanel.setSize(Config.appsize);
+		this.rootpanel.setBackground(Color.white);
+		this.rootpanel.setLocation(0, 0);
+		this.add(this.rootpanel);
+	}
+	
+	/**
+	 * This will insert the panels into the applet.
+	 */
+	private void insertPanels()
+	{
+		//Insert panels hardcoded, and then distribute over the applet.
+		ArrayList<AMainPanel> panels = new ArrayList<AMainPanel>();
+		panels.add(new SliderTextPanel());
+		panels.add(new ButtonTextPanel());
+
+		//Initialize the panels with their sizes and insert them in a horizontal array.
+		int combinedUsedWidth = 0;
+		for(int i = 0; i < panels.size(); i++)
+		{
+			//Calculate the size this panel is allowed to take based on its predecessors and the total size.
+			int panelsLeft = panels.size() - i;
+			int width = (int)((this.rootpanel.getWidth() - combinedUsedWidth) / (double)panelsLeft);
+			int height = this.rootpanel.getHeight();
+						
+			//Set the size and location of the panel, and allow its own intialization before insertion.
+			AMainPanel amp = panels.get(i);
+			amp.setSize(width, height);
+			amp.setLocation(combinedUsedWidth, 0);
+			amp.initialize(width, height);
+			this.rootpanel.add(amp);
+			
+			combinedUsedWidth += width;
+		}
 	}
 	
 	
@@ -72,6 +109,7 @@ public class EmoSynthApplet extends JApplet
 	{
 		Output.show();
 		
+		//TODO remove
 		//Test the FreeTTS text-to-speech capabilities.
 		Voice voice = VoiceManager.getInstance().getVoice(Config.freeTTSSpeakerName);
 		Speaker speaker = new Speaker(Config.freeTTSSpeakerName, voice);
