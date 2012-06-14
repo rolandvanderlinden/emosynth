@@ -62,6 +62,18 @@ public class Speaker
 		else
 			throw new UnsupportedOperationException("The voice of speaker '" + name + "' was not correctly initialized.");
 	}
+
+	/**
+	 * This will change the pitch of the speaker.
+	 * @param pitch
+	 */
+	public void setPitch(int pitch)
+	{
+		if(voice != null)
+			voice.setPitch(pitch);
+		else
+			throw new UnsupportedOperationException("The voice of speaker '" + name + "' was not correctly initialized.");
+	}
 	
 	public void dispose()
 	{

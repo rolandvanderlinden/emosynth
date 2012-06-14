@@ -108,12 +108,6 @@ public class EmoSynthApplet extends JApplet
 	public void start()
 	{
 		Output.show();
-		
-		//TODO remove
-		//Test the FreeTTS text-to-speech capabilities.
-		Voice voice = VoiceManager.getInstance().getVoice(Config.freeTTSSpeakerName);
-		Speaker speaker = new Speaker(Config.freeTTSSpeakerName, voice);
-		speaker.say("Hello! Welcome to the unfinished EmoSynth application.");
 	}
 	
 	/**

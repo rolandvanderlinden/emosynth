@@ -10,7 +10,7 @@ import java.awt.Dimension;
 public class Config
 {
 	public final static String appname = "Emotional Synthesizer [PLACEHOLDER]";
-	public final static Dimension appsize = new Dimension(1200, 900);
+	public final static Dimension appsize = new Dimension(1200, 800);
 	
 	public final static String freeTTSSpeakerName = "kevin16"; //Existing voices: alan, kevin8, kevin16
 }

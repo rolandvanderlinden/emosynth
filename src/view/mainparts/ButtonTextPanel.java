@@ -10,12 +10,11 @@ public class ButtonTextPanel extends AMainPanel
 	{
 		super();
 		
-		this.setBackground(Color.pink);
+		//NOTE dont do init here, will be called from the controller.
 	}
 
 	@Override
 	public void initialize(int width, int height)
 	{
-		Output.show("(" + width + "," + height + ")");
 	}
 }
