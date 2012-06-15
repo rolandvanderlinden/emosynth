@@ -7,6 +7,7 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import util.Output;
 import view.mainparts.SliderTextPanel;
 import controller.tts.MainSpeaker;
 
@@ -31,6 +32,8 @@ public class SliderTextController implements ActionListener, ChangeListener
 		if(ae.getSource().equals(panel.getSynthesizeButton()))
 		{
 			String text = panel.getInsertedText();
+			if(text.length() == 0)
+				text = "No input";
 			MainSpeaker.Instance().say(text);
 		}
 	}
@@ -47,9 +50,55 @@ public class SliderTextController implements ActionListener, ChangeListener
 			//Change the pitch
 			if(source.equals(panel.getPitchSlider()))
 			{
-				int pitch = (int)source.getValue();
+				//Pitch runs from 0 - 500, and the slider does also.
+				int pitch = source.getValue();
 				MainSpeaker.Instance().setPitch(pitch);
 			}
+			//Change the pitch shift
+			else if(source.equals(panel.getPitchShiftSlider()))
+			{
+				int value = source.getValue();
+				
+				//Pitch shift runs from 0 - 10 (for useful shifts). 
+				//If we ever change the range of 0 - 10, then we also need to change it in the init of the slider.
+				float pitchshift = 10 * (value - SliderTextPanel.PITCHSHIFT_MIN) / (float)(SliderTextPanel.PITCHSHIFT_MAX - SliderTextPanel.PITCHSHIFT_MIN);
+				MainSpeaker.Instance().setPitchShift(pitchshift);
+			}
+			//Change the pitch range
+			else if(source.equals(panel.getPitchRangeSlider()))
+			{
+				//Pitch range runs from 0 - 500, and the slider does also.
+				int pitchrange = source.getValue();
+				MainSpeaker.Instance().setPitchRange(pitchrange);
+			}
+			//Change the words per minute
+			else if(source.equals(panel.getWordsPMSlider()))
+			{
+				//Rate runs from 30 - 300 (for useful rates), and the slider does also.
+				int wordspm = source.getValue();
+				MainSpeaker.Instance().setWordsPM(wordspm);
+			}
+			//Change the duration stretch
+			else if(source.equals(panel.getDurStretchSlider()))
+			{
+				int value = source.getValue();
+
+				//Duration stretch runs from 0 - 10 (for useful stretches anyway).
+				//If we ever change the range of 0 - 10, then we also need to change it in the init of the slider.
+				float durstretch = 10 * (value - SliderTextPanel.DURSTRETCH_MIN) / (float)(SliderTextPanel.DURSTRETCH_MAX - SliderTextPanel.DURSTRETCH_MIN);
+				MainSpeaker.Instance().setDurationStretch(durstretch);
+			}
+			//Change the volume
+			else if(source.equals(panel.getVolSlider()))
+			{
+				int value = source.getValue();
+				
+				//Volume runs from 0.0 - 1.0, but the slider is from 0 - 100.
+				float volume = (value - SliderTextPanel.VOL_MIN) / (float)(SliderTextPanel.VOL_MAX - SliderTextPanel.VOL_MIN);
+				MainSpeaker.Instance().setVolume(volume);
+			}
+			else
+				throw new UnsupportedOperationException("Source unknown");
 		}
 	}
 
