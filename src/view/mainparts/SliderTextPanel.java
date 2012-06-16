@@ -77,7 +77,14 @@ public class SliderTextPanel extends AMainPanel
 		VectorF2 durslocation = LocationCalculator.calculateLocation(slidersize, holdersize, 0.2f, 0.45f);
 		VectorF2 vollocation = LocationCalculator.calculateLocation(slidersize, holdersize, 0.2f, 0.55f);
 		
-		//Textfield
+		//Synthesize button.
+		synthesizeButton = new JButton("Synthesize");
+		synthesizeButton.setSize((int)synthesizebuttonsize.x, (int)synthesizebuttonsize.y);
+		synthesizeButton.setLocation((int)synthesizebuttonlocation.x, (int)synthesizebuttonlocation.y);
+		synthesizeButton.addActionListener(this.controller);
+		this.add(this.synthesizeButton);
+		
+		//TextArea
 		textarea = new JTextArea();
 		textarea.setSize((int)textareasize.x, (int)textareasize.y);
 		textarea.setLineWrap(true);
@@ -87,13 +94,6 @@ public class SliderTextPanel extends AMainPanel
 		textScrollpane.setLocation((int)textarealocation.x, (int)textarealocation.y);
 		textScrollpane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		this.add(this.textScrollpane);
-		
-		//Synthesize button.
-		synthesizeButton = new JButton("Synthesize");
-		synthesizeButton.setSize((int)synthesizebuttonsize.x, (int)synthesizebuttonsize.y);
-		synthesizeButton.setLocation((int)synthesizebuttonlocation.x, (int)synthesizebuttonlocation.y);
-		synthesizeButton.addActionListener(this.controller);
-		this.add(this.synthesizeButton);
 		
 		//Labels
 		pitchLabel = new JLabel("Pitch");
