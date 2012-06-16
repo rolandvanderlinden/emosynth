@@ -2,23 +2,31 @@ package controller.buttontext;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DecimalFormat;
 
 import org.tudelft.affectbutton.AffectButtonActionEvent;
 
-import controller.tts.MainSpeaker;
-
 import view.mainparts.ButtonTextPanel;
+import application.Config;
+
+import com.sun.speech.freetts.Voice;
+import com.sun.speech.freetts.VoiceManager;
+
+import controller.tts.MainSpeaker;
+import controller.tts.Speaker;
 
 public class ButtonTextController implements ActionListener
 {
 	private ButtonTextPanel panel;
+	private Speaker speaker;
 	
 	public ButtonTextController(ButtonTextPanel panel)
 	{
 		super();
 		
 		this.panel = panel;
+		
+		Voice voice = VoiceManager.getInstance().getVoice(Config.freeTTSSpeakerName);
+		speaker = new Speaker(Config.freeTTSSpeakerName, voice);
 	}
 
 	/**
@@ -43,7 +51,13 @@ public class ButtonTextController implements ActionListener
 			String text = panel.getInsertedText();
 			if(text.length() == 0)
 				text = "No input";
-			MainSpeaker.Instance().say(text);
+			
+			speaker.say(text);
 		}
+	}
+	
+	public Speaker getSpeaker()
+	{
+		return this.speaker;
 	}
 }
