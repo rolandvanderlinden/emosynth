@@ -1,8 +1,9 @@
-package application;
+package applicationtest;
 
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+
 
 import view.base.AppletFrame;
 
@@ -14,7 +15,7 @@ import view.base.AppletFrame;
  * @author Roland van der Linden
  *
  */
-public class EmoSynthApplication
+public class TestApplication
 {
 	/**
 	 * This will start the application.
@@ -22,8 +23,8 @@ public class EmoSynthApplication
 	 */
 	public static void main(String[] args)
 	{
-		EmoSynthApplet ESapplet = new EmoSynthApplet();
-		buildFrameAroundApplet(ESapplet);
+		TestApplet Tapplet = new TestApplet();
+		buildFrameAroundApplet(Tapplet);
 	}
 	
 	/**
@@ -32,13 +33,13 @@ public class EmoSynthApplication
 	 * @param applet
 	 * @return
 	 */
-	protected static JFrame buildFrameAroundApplet(EmoSynthApplet applet)
+	protected static JFrame buildFrameAroundApplet(TestApplet applet)
 	{
 		if(applet == null)
 			throw new UnsupportedOperationException();		
 		
 		//We will put the applet in a window (jframe).
-		AppletFrame frame = new AppletFrame(Config.appname, applet);
+		AppletFrame frame = new AppletFrame(TestConfig.appname, applet);
 		frame.add(applet);
 		
 		//We can now init and start the app.

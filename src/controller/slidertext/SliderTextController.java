@@ -7,7 +7,7 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import application.Config;
+import applicationtest.TestConfig;
 
 import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
@@ -27,8 +27,8 @@ public class SliderTextController implements ActionListener, ChangeListener
 		
 		this.panel = panel;
 		
-		Voice voice = VoiceManager.getInstance().getVoice(Config.freeTTSSpeakerName);
-		speaker = new Speaker(Config.freeTTSSpeakerName, voice);
+		Voice voice = VoiceManager.getInstance().getVoice(TestConfig.freeTTSSpeakerName);
+		speaker = new Speaker(TestConfig.freeTTSSpeakerName, voice);
 	}
 	
 	/**

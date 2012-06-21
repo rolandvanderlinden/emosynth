@@ -1,4 +1,4 @@
-package application;
+package applicationprototype;
 
 import java.awt.Dimension;
 
@@ -7,9 +7,9 @@ import java.awt.Dimension;
  * @author Roland van der Linden
  *
  */
-public class Config
+public class PrototypeConfig
 {
-	public final static String appname = "Emotional Synthesizer [PLACEHOLDER]";
+	public final static String appname = "Affect Based Speech Synthesis";
 	public final static Dimension appsize = new Dimension(1200, 800);
 	
 	public final static String freeTTSSpeakerName = "kevin16"; //Existing voices: alan, kevin8, kevin16

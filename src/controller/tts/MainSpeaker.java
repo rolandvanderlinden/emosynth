@@ -1,7 +1,7 @@
 package controller.tts;
 
 import util.Output;
-import application.Config;
+import applicationtest.TestConfig;
 
 import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
@@ -18,8 +18,8 @@ public class MainSpeaker
 	
 	private MainSpeaker()
 	{
-		Voice voice = VoiceManager.getInstance().getVoice(Config.freeTTSSpeakerName);
-		speaker = new Speaker(Config.freeTTSSpeakerName, voice);
+		Voice voice = VoiceManager.getInstance().getVoice(TestConfig.freeTTSSpeakerName);
+		speaker = new Speaker(TestConfig.freeTTSSpeakerName, voice);
 	}
 	
 	/**

@@ -1,4 +1,4 @@
-package application;
+package applicationprototype;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -11,12 +11,13 @@ import view.mainparts.AMainPanel;
 import view.mainparts.ButtonTextPanel;
 import view.mainparts.SliderTextPanel;
 
+
 import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
 
 import controller.tts.Speaker;
 
-public class EmoSynthApplet extends JApplet
+public class PrototypeApplet extends JApplet
 {
 	// **********************************************
 	// Fields
@@ -57,11 +58,11 @@ public class EmoSynthApplet extends JApplet
 	{
 		//Set the correct size of the applet.
 		this.setLayout(null);
-		this.setSize(Config.appsize);
+		this.setSize(PrototypeConfig.appsize);
 
 		//Insert the most basic background panel into the applet.
 		this.rootpanel = new JPanel(null);
-		this.rootpanel.setSize(Config.appsize);
+		this.rootpanel.setSize(PrototypeConfig.appsize);
 		this.rootpanel.setBackground(Color.white);
 		this.rootpanel.setLocation(0, 0);
 		this.add(this.rootpanel);
