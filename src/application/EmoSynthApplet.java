@@ -19,7 +19,7 @@ import controller.tts.Speaker;
 public class EmoSynthApplet extends JApplet
 {
 	// **********************************************
-	// Fields
+	// Fields just a test
 	// **********************************************
 	
 	public JPanel rootpanel;
