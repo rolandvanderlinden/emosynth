@@ -1,4 +1,4 @@
-package view.mainparts;
+package view.test;
 
 import java.awt.Color;
 
@@ -12,7 +12,7 @@ import model.util.VectorF2;
 import util.LocationCalculator;
 import util.LocationCalculator.LocationType;
 import util.SizeCalculator;
-import controller.slidertext.SliderTextController;
+import controller.test.SliderTextController;
 import controller.tts.MainSpeaker;
 
 public class SliderTextPanel extends AMainPanel

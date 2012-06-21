@@ -7,9 +7,9 @@ import javax.swing.JApplet;
 import javax.swing.JPanel;
 
 import util.Output;
-import view.mainparts.AMainPanel;
-import view.mainparts.ButtonTextPanel;
-import view.mainparts.SliderTextPanel;
+import view.test.AMainPanel;
+import view.test.ButtonTextPanel;
+import view.test.SliderTextPanel;
 
 
 import com.sun.speech.freetts.Voice;

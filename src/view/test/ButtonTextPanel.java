@@ -1,4 +1,4 @@
-package view.mainparts;
+package view.test;
 
 import java.awt.Color;
 import java.text.DecimalFormat;
@@ -12,7 +12,7 @@ import model.util.VectorF2;
 
 import org.tudelft.affectbutton.AffectButton;
 
-import controller.buttontext.ButtonTextController;
+import controller.test.ButtonTextController;
 
 import util.LocationCalculator;
 import util.LocationCalculator.LocationType;

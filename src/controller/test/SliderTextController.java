@@ -1,4 +1,4 @@
-package controller.slidertext;
+package controller.test;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +12,7 @@ import applicationtest.TestConfig;
 import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
 
-import view.mainparts.SliderTextPanel;
+import view.test.SliderTextPanel;
 import controller.tts.MainSpeaker;
 import controller.tts.Speaker;
 

@@ -68,9 +68,9 @@ public class Output
 		
 		//Put the panel in the frame in which we show
 		//the output.
-		JFrame frame = new JFrame("EmoSynth - Secondary Debug Output");
+		JFrame frame = new JFrame("Secondary Debug Output");
 		frame.add(newPanel);
-		frame.setSize(800, 500);
+		frame.setSize(450, 600);
 		frame.setVisible(true);
 		
 		initializedSecondaryWindow = true;

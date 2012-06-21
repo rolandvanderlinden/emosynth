@@ -1,11 +1,11 @@
-package controller.buttontext;
+package controller.test;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import org.tudelft.affectbutton.AffectButtonActionEvent;
 
-import view.mainparts.ButtonTextPanel;
+import view.test.ButtonTextPanel;
 import applicationtest.TestConfig;
 
 import com.sun.speech.freetts.Voice;
