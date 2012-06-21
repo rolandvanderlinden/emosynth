@@ -1,21 +1,14 @@
 package applicationprototype;
 
 import java.awt.Color;
-import java.util.ArrayList;
 
 import javax.swing.JApplet;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import util.Output;
-import view.test.AMainPanel;
-import view.test.ButtonTextPanel;
-import view.test.SliderTextPanel;
-
-
-import com.sun.speech.freetts.Voice;
-import com.sun.speech.freetts.VoiceManager;
-
-import controller.tts.Speaker;
+import view.prototype.BackgroundPanel;
+import view.prototype.BackgroundPanel;
 
 public class PrototypeApplet extends JApplet
 {
@@ -73,29 +66,11 @@ public class PrototypeApplet extends JApplet
 	 */
 	private void insertPanels()
 	{
-		//Insert panels hardcoded, and then distribute over the applet.
-		ArrayList<AMainPanel> panels = new ArrayList<AMainPanel>();
-		panels.add(new SliderTextPanel());
-		panels.add(new ButtonTextPanel());
+		int width = this.rootpanel.getWidth();
+		int height = this.rootpanel.getHeight();
 
-		//Initialize the panels with their sizes and insert them in a horizontal array.
-		int combinedUsedWidth = 0;
-		for(int i = 0; i < panels.size(); i++)
-		{
-			//Calculate the size this panel is allowed to take based on its predecessors and the total size.
-			int panelsLeft = panels.size() - i;
-			int width = (int)((this.rootpanel.getWidth() - combinedUsedWidth) / (double)panelsLeft);
-			int height = this.rootpanel.getHeight();
-						
-			//Set the size and location of the panel, and allow its own intialization before insertion.
-			AMainPanel amp = panels.get(i);
-			amp.setSize(width, height);
-			amp.setLocation(combinedUsedWidth, 0);
-			amp.initialize(width, height);
-			this.rootpanel.add(amp);
-			
-			combinedUsedWidth += width;
-		}
+		BackgroundPanel backgroundPanel = new BackgroundPanel();
+		this.rootpanel.add(backgroundPanel);
 	}
 	
 	

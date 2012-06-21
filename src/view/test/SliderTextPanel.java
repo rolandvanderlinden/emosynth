@@ -52,7 +52,7 @@ public class SliderTextPanel extends AMainPanel
 		this.controller = new SliderTextController(this);
 		
 		this.setLayout(null);
-		this.setBackground(Color.yellow);
+		//this.setBackground(Color.white);
 		
 		//Sizes
 		VectorF2 holdersize = new VectorF2(width, height);

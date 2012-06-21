@@ -46,7 +46,7 @@ public class ButtonTextPanel extends AMainPanel
 		this.padFormat = new DecimalFormat("0.000");
 		
 		this.setLayout(null);
-		this.setBackground(Color.pink);
+		//this.setBackground(Color.white);
 	
 		//Sizes
 		VectorF2 holdersize = new VectorF2(width, height);
