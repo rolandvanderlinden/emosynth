@@ -20,7 +20,11 @@ import controller.tts.Speaker;
 public class TestApplet extends JApplet
 {
 	// **********************************************
+<<<<<<< HEAD:src/applicationtest/TestApplet.java
 	// Fields
+=======
+	//Fields just a test
+>>>>>>> it didn't compile with override, i don't know why:src/application/EmoSynthApplet.java
 	// **********************************************
 	
 	public JPanel rootpanel;
