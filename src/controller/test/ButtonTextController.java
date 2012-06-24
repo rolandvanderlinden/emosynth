@@ -31,6 +31,7 @@ public class ButtonTextController implements ActionListener
 	/**
 	 * This method is called when an action occurred (in this case to a button).
 	 */
+	@Override
 	public void actionPerformed(ActionEvent ae)
 	{
 		//Get the PAD values from the affectbutton.

@@ -34,6 +34,7 @@ public class SliderTextController implements ActionListener, ChangeListener
 	/**
 	 * This method is called whenever an action (to a button) occurred.
 	 */
+	@Override
 	public void actionPerformed(ActionEvent ae)
 	{
 		//Synthesize the text from the textarea.
@@ -50,6 +51,7 @@ public class SliderTextController implements ActionListener, ChangeListener
 	/**
 	 * This method is called whenever a change (to a slider) occurred.
 	 */
+	@Override
 	public void stateChanged(ChangeEvent ce)
 	{
 		JSlider source = (JSlider)ce.getSource();
