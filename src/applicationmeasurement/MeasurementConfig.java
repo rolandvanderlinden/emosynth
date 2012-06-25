@@ -15,12 +15,14 @@ public class MeasurementConfig
 	
 	public final static String freeTTSSpeakerName = "kevin16"; //Existing voices: alan, kevin8, kevin16
 	
+	public final static long waitTimeForNextTest = 1000;
+	
 	public final static String explanatoryText = 
 			"Dear participant,\n"
 			+ "We would like you to listen to the affective state (the emotion) of the synthetic voice, and then indicate which affective state you recognized by selecting the associated facial expression on the affectbutton."
 			+ "Please do not base your selection on the emotion contained in the words, but base it on the emotion contained in the speech itself.\n\n"
 			+ "When you press the 'Save & Continue' button, we will automatically save your result to a file. In order to process your results, we would like you to send this file to us when you are done."
-			+ "The file can be found on the location where you are running the program from. The filename is '[TODO INSERT FILENAME]'. Please send this to [TODO INSERT EMAILADDRESS]\n\n"
+			+ "The file can be found in the location where you are running the program from. The filename is '[TODO INSERT FILENAME]'. Please send this file to [TODO INSERT EMAILADDRESS].\n\n"
 			+ "Some remarks to help you get started:\n"
 			+ " - Move over the affectbutton (the one with a face on it) to change the facial expression of the face. Left-mouse press on the affectbutton to record your selection. Pressing it again overwrites your selection.\n"
 			+ " - Press the 'Save & Continue' button if you think the selection fits with the affective state of the voice.\n"

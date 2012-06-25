@@ -3,6 +3,7 @@ package view.measurement;
 import java.awt.Color;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
@@ -29,6 +30,7 @@ public class MeasurementPanel extends TranslucentBufferedImageJPanel
 	protected JButton continueButton, skipButton, repeatButton, neutralButton;
 	protected JTextArea inputArea;
 	protected JScrollPane inputScrollpane;
+	protected JLabel testsLabel;
 	
 	public MeasurementPanel(VectorF2 size)
 	{
@@ -47,20 +49,20 @@ public class MeasurementPanel extends TranslucentBufferedImageJPanel
 		//Sizes
 		VectorF2 holdersize = new VectorF2(width, height);
 		VectorF2 explanationsize = SizeCalculator.calculateSize(holdersize, 0.9f, 0.4f);
-		
 		VectorF2 afbuttonsize = SizeCalculator.calculateSize(new VectorF2(50, 50), new VectorF2(200, 200), holdersize, 0.25f, 0.25f, 1);
 		VectorF2 buttonsize = SizeCalculator.calculateSize(new VectorF2(160, 30), holdersize);
 		VectorF2 inputareasize = SizeCalculator.calculateSize(new VectorF2(100, 30), new VectorF2(500, 200), holdersize, 0.8f, 0.1f);
+		VectorF2 tlabelsize = SizeCalculator.calculateSize(new VectorF2(200, 20), holdersize);
 		
 		//Locations
 		VectorF2 explanationpos = LocationCalculator.calculateLocation(explanationsize, holdersize, LocationType.CENTER, 0.05f);
-		
-		VectorF2 afbuttonpos = LocationCalculator.calculateLocation(afbuttonsize, holdersize, 0.3f, 0.525f);
+		VectorF2 afbuttonpos = LocationCalculator.calculateLocation(afbuttonsize, holdersize, 0.28f, 0.525f);
 		VectorF2 continuebuttonpos = LocationCalculator.calculateLocation(buttonsize, holdersize, 0.75f, 0.675f);
 		VectorF2 repeatbuttonpos = LocationCalculator.calculateLocation(buttonsize, holdersize, 0.75f, 0.75f);
 		VectorF2 neutralbuttonpos = LocationCalculator.calculateLocation(buttonsize, holdersize, 0.75f, 0.825f);
 		VectorF2 skipbuttonpos = LocationCalculator.calculateLocation(buttonsize, holdersize, 0.75f, 0.9f);
 		VectorF2 inputareapos = LocationCalculator.calculateLocation(inputareasize, holdersize, 0.05f, 0.85f);
+		VectorF2 tlabelpos = LocationCalculator.calculateLocation(tlabelsize, holdersize, 0.275f, 0.96f);
 		
 		//Explanation TextArea
 		explanationArea = new JTextArea();
@@ -88,6 +90,7 @@ public class MeasurementPanel extends TranslucentBufferedImageJPanel
 		continueButton = new JButton("Save & Continue");
 		ComponentUtil.setComponentBounds(continueButton, buttonsize, continuebuttonpos);
 		continueButton.addActionListener(this.controller);
+		continueButton.setEnabled(false);
 		this.add(this.continueButton);
 		repeatButton = new JButton("Repeat test");
 		ComponentUtil.setComponentBounds(repeatButton, buttonsize, repeatbuttonpos);
@@ -111,7 +114,16 @@ public class MeasurementPanel extends TranslucentBufferedImageJPanel
 		ComponentUtil.setComponentBounds(inputScrollpane, inputareasize, inputareapos);
 		inputScrollpane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		this.add(this.inputScrollpane);
-
+		
+		//Insert tests label
+		testsLabel = new JLabel();
+		ComponentUtil.setComponentBounds(testsLabel, tlabelsize, tlabelpos);
+		testsLabel.setForeground(Color.white);
+		testsLabel.setFont(Content.mediumFont);
+		testsLabel.setOpaque(false);
+		this.add(testsLabel);
+		
+		this.setTestsDone(0, 0);
 	}
 	
 	public AffectButton getAffectButton()
@@ -122,6 +134,26 @@ public class MeasurementPanel extends TranslucentBufferedImageJPanel
 	public JButton getContinueButton()
 	{
 		return this.continueButton;
+	}
+	
+	public JButton getRepeatButton()
+	{
+		return this.repeatButton;
+	}
+	
+	public JButton getNeutralButton()
+	{
+		return this.neutralButton;
+	}
+	
+	public JButton getSkipButton()
+	{
+		return this.skipButton;
+	}
+
+	public void setTestsDone(int saved, int total)
+	{
+		this.testsLabel.setText("Tests saved & total: " + saved + " / " + total);
 	}
 	
 	public String getInsertedText()
