@@ -45,6 +45,13 @@ public class SliderTextController implements ActionListener, ChangeListener
 				text = "No input";
 			
 			speaker.say(text);
+		
+			String[] tests = new String[3];
+			tests[0] = "Hello";
+			tests[1] = "I did not know";
+			tests[2] = "you are so awesome";
+			speaker.say(tests);
+		
 		}
 	}
 
