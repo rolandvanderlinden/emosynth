@@ -72,7 +72,6 @@ public class SizeCalculator
 	/**
 	 * Calculate the size to be used based on the ideal width and height ratio, but only if the holdersize allows it.
 	 * 
-	 * @param minsize
 	 * @param holdersize
 	 * @param ideal_w_ratio
 	 * @param ideal_h_ratio
@@ -217,7 +216,10 @@ public class SizeCalculator
 	
 	public static VectorF2 calculateSizeWithMargins(VectorF2 holdersize, float ideal_w_ratio, float ideal_h_ratio, float forced_wh_ratio, VectorF2 margins)
 	{
-		return calculateSizeWithMargins(new VectorF2(), holdersize, ideal_w_ratio, ideal_h_ratio, margins);
+		VectorF2 result = calculateSizeWithMargins(new VectorF2(), holdersize, ideal_w_ratio, ideal_h_ratio, margins);
+		result = forceWidthHeightRatio(result, forced_wh_ratio);
+		
+		return result;	
 	}
 	
 	/**

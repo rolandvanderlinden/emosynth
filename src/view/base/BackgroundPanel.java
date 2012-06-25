@@ -2,13 +2,17 @@ package view.base;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FontMetrics;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.util.VectorF2;
+import util.ComponentUtil;
+import util.LocationCalculator;
+import util.SizeCalculator;
+import util.LocationCalculator.LocationType;
 import view.components.TranslucentBufferedImageJPanel;
-import applicationprototype.PrototypeConfig;
 import content.Content;
 
 public class BackgroundPanel extends JPanel
@@ -34,6 +38,9 @@ public class BackgroundPanel extends JPanel
 	
 	private void init(Dimension size, int outerbordersize)
 	{
+		FontMetrics smallFontMetrics = this.getFontMetrics(Content.smallFont);
+		VectorF2 holdersize = new VectorF2(size.width, size.height);
+		
 		//Create this screen itself.
 		this.setLayout(null);
 		this.setSize(size);
@@ -104,11 +111,13 @@ public class BackgroundPanel extends JPanel
 		this.add(controlsPanel);
 		
 		//Create labels on the toppanel.
-		this.createdLabel = new JLabel("Created by Irene Renkens, Aurimas Bavarskis, Roland van der Linden");
+		String createdText = "Created by Irene Renkens, Aurimas Bavarskis, Roland van der Linden";
+		VectorF2 clabelsize = SizeCalculator.calculateSize(new VectorF2(smallFontMetrics.stringWidth(createdText), 15), holdersize);
+		VectorF2 clabelpos = LocationCalculator.calculateLocationWithMargins(clabelsize, holdersize, LocationType.END, LocationType.BEGIN, new VectorF2(4,2));
+		this.createdLabel = new JLabel(createdText);
+		ComponentUtil.setComponentBounds(createdLabel, clabelsize, clabelpos);
 		this.createdLabel.setHorizontalAlignment(JLabel.CENTER);
 		this.createdLabel.setVerticalAlignment(JLabel.TOP);
-		this.createdLabel.setSize(250, 30);
-		this.createdLabel.setLocation(900, 5);
 		this.createdLabel.setFont(Content.smallFont);
 		this.createdLabel.setForeground(Color.white);
 		this.add(createdLabel);

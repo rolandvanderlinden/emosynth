@@ -1,11 +1,8 @@
 package view.measurement;
 
 import java.awt.Color;
-import java.text.DecimalFormat;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
@@ -13,27 +10,29 @@ import model.util.VectorF2;
 
 import org.tudelft.affectbutton.AffectButton;
 
+import util.ComponentUtil;
 import util.LocationCalculator;
 import util.LocationCalculator.LocationType;
 import util.SizeCalculator;
+import view.components.TranslucentBufferedImageJPanel;
+import applicationmeasurement.MeasurementConfig;
+import content.Content;
 import controller.measurement.MeasurementController;
-import controller.prototype.PrototypeController;
 
-public class MeasurementPanel extends JPanel
+public class MeasurementPanel extends TranslucentBufferedImageJPanel
 {
 	protected MeasurementController controller;
 	
+	protected JTextArea explanationArea;
+	protected JScrollPane explanationScrollpane;
 	protected AffectButton afbutton;
-	protected JButton synthesizeButton;
-	protected JTextArea textarea;
-	protected JScrollPane textScrollpane;
-	
-	protected JLabel plabel, alabel, dlabel;
-	private DecimalFormat padFormat;
+	protected JButton continueButton, skipButton, repeatButton, neutralButton;
+	protected JTextArea inputArea;
+	protected JScrollPane inputScrollpane;
 	
 	public MeasurementPanel(VectorF2 size)
 	{
-		super();
+		super(Content.black, 0.45f);
 		
 		initialize((int)size.x, (int)size.y);
 	}
@@ -41,86 +40,78 @@ public class MeasurementPanel extends JPanel
 	private void initialize(int width, int height)
 	{
 		this.controller = new MeasurementController(this);
-		this.padFormat = new DecimalFormat("0.000");
 		
 		this.setLayout(null);
 		this.setSize(width, height);
-		this.setOpaque(false);
-		
+
 		//Sizes
 		VectorF2 holdersize = new VectorF2(width, height);
+		VectorF2 explanationsize = SizeCalculator.calculateSize(holdersize, 0.9f, 0.4f);
+		
 		VectorF2 afbuttonsize = SizeCalculator.calculateSize(new VectorF2(50, 50), new VectorF2(200, 200), holdersize, 0.25f, 0.25f, 1);
-		VectorF2 synthesizebuttonsize = SizeCalculator.calculateSize(new VectorF2(100, 30), holdersize);
-		VectorF2 textareasize = SizeCalculator.calculateSize(new VectorF2(100, 30), new VectorF2(500, 200), holdersize, 0.8f, 0.1f);
-		VectorF2 padlabelsize = SizeCalculator.calculateSize(new VectorF2(50, 30), holdersize);
+		VectorF2 buttonsize = SizeCalculator.calculateSize(new VectorF2(160, 30), holdersize);
+		VectorF2 inputareasize = SizeCalculator.calculateSize(new VectorF2(100, 30), new VectorF2(500, 200), holdersize, 0.8f, 0.1f);
 		
 		//Locations
-		VectorF2 afbuttonlocation = LocationCalculator.calculateLocation(afbuttonsize, holdersize, LocationType.CENTER, 0.45f);
-		VectorF2 synthesizebuttonlocation = LocationCalculator.calculateLocation(synthesizebuttonsize, holdersize, 0.725f, 0.9f);
-		VectorF2 textarealocation = LocationCalculator.calculateLocation(textareasize, holdersize, LocationType.CENTER, 0.775f);
-		VectorF2 plocation = LocationCalculator.calculateLocation(padlabelsize, holdersize, LocationType.ONE_QUARTER, 0.7f);
-		VectorF2 alocation = LocationCalculator.calculateLocation(padlabelsize, holdersize, LocationType.CENTER, 0.7f);
-		VectorF2 dlocation = LocationCalculator.calculateLocation(padlabelsize, holdersize, LocationType.THREE_QUARTERS, 0.7f);
+		VectorF2 explanationpos = LocationCalculator.calculateLocation(explanationsize, holdersize, LocationType.CENTER, 0.05f);
+		
+		VectorF2 afbuttonpos = LocationCalculator.calculateLocation(afbuttonsize, holdersize, 0.3f, 0.525f);
+		VectorF2 continuebuttonpos = LocationCalculator.calculateLocation(buttonsize, holdersize, 0.75f, 0.675f);
+		VectorF2 repeatbuttonpos = LocationCalculator.calculateLocation(buttonsize, holdersize, 0.75f, 0.75f);
+		VectorF2 neutralbuttonpos = LocationCalculator.calculateLocation(buttonsize, holdersize, 0.75f, 0.825f);
+		VectorF2 skipbuttonpos = LocationCalculator.calculateLocation(buttonsize, holdersize, 0.75f, 0.9f);
+		VectorF2 inputareapos = LocationCalculator.calculateLocation(inputareasize, holdersize, 0.05f, 0.85f);
+		
+		//Explanation TextArea
+		explanationArea = new JTextArea();
+		ComponentUtil.setComponentBounds(explanationArea, explanationsize, new VectorF2());
+		explanationArea.setForeground(Color.white);
+		explanationArea.setFont(Content.mediumFont);
+		explanationArea.setOpaque(false);
+		explanationArea.setEditable(false);
+		explanationArea.setLineWrap(true);
+		explanationArea.setWrapStyleWord(true);
+		explanationArea.setText(MeasurementConfig.explanatoryText);
+		explanationScrollpane = new JScrollPane(explanationArea);
+		explanationScrollpane.setOpaque(false);
+		explanationScrollpane.getViewport().setOpaque(false);
+		ComponentUtil.setComponentBounds(explanationScrollpane, explanationsize, explanationpos);
+		this.add(this.explanationScrollpane);
 		
 		//AffectButton
 		afbutton = new AffectButton();
-		afbutton.setSize((int)afbuttonsize.x, (int)afbuttonsize.y);
-		afbutton.setLocation((int)afbuttonlocation.x, (int)afbuttonlocation.y);
+		ComponentUtil.setComponentBounds(afbutton, afbuttonsize, afbuttonpos);
 		afbutton.addActionListener(controller);
 		this.add(this.afbutton);
 		
 		//Synthesize button.
-		synthesizeButton = new JButton("Synthesize");
-		synthesizeButton.setSize((int)synthesizebuttonsize.x, (int)synthesizebuttonsize.y);
-		synthesizeButton.setLocation((int)synthesizebuttonlocation.x, (int)synthesizebuttonlocation.y);
-		synthesizeButton.addActionListener(this.controller);
-		this.add(this.synthesizeButton);
+		continueButton = new JButton("Save & Continue");
+		ComponentUtil.setComponentBounds(continueButton, buttonsize, continuebuttonpos);
+		continueButton.addActionListener(this.controller);
+		this.add(this.continueButton);
+		repeatButton = new JButton("Repeat test");
+		ComponentUtil.setComponentBounds(repeatButton, buttonsize, repeatbuttonpos);
+		repeatButton.addActionListener(this.controller);
+		this.add(this.repeatButton);
+		neutralButton = new JButton("Compare with neutral");
+		ComponentUtil.setComponentBounds(neutralButton, buttonsize, neutralbuttonpos);
+		neutralButton.addActionListener(this.controller);
+		this.add(this.neutralButton);
+		skipButton = new JButton("Skip (I don't know)");
+		ComponentUtil.setComponentBounds(skipButton, buttonsize, skipbuttonpos);
+		skipButton.addActionListener(this.controller);
+		this.add(this.skipButton);
 		
-		//TextArea
-		textarea = new JTextArea();
-		textarea.setSize((int)textareasize.x, (int)textareasize.y);
-		textarea.setLineWrap(true);
-		textarea.setWrapStyleWord(true);
-		textScrollpane = new JScrollPane(textarea);
-		textScrollpane.setSize(textarea.getWidth(), textarea.getHeight());
-		textScrollpane.setLocation((int)textarealocation.x, (int)textarealocation.y);
-		textScrollpane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		this.add(this.textScrollpane);
+		//Insert TextArea
+		inputArea = new JTextArea();
+		ComponentUtil.setComponentBounds(inputArea, inputareasize, new VectorF2());
+		inputArea.setLineWrap(true);
+		inputArea.setWrapStyleWord(true);
+		inputScrollpane = new JScrollPane(inputArea);
+		ComponentUtil.setComponentBounds(inputScrollpane, inputareasize, inputareapos);
+		inputScrollpane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		this.add(this.inputScrollpane);
 
-		//Labels
-		plabel = new JLabel();
-		plabel.setSize((int)padlabelsize.x, (int)padlabelsize.y);
-		plabel.setLocation((int)plocation.x, (int)plocation.y);
-		plabel.setForeground(Color.white);
-		this.add(plabel);
-		alabel = new JLabel();
-		alabel.setSize((int)padlabelsize.x, (int)padlabelsize.y);
-		alabel.setLocation((int)alocation.x, (int)alocation.y);
-		alabel.setForeground(Color.white);
-		this.add(alabel);
-		dlabel = new JLabel();
-		dlabel.setSize((int)padlabelsize.x, (int)padlabelsize.y);
-		dlabel.setLocation((int)dlocation.x, (int)dlocation.y);
-		dlabel.setForeground(Color.white);
-		this.add(dlabel);
-		setPAD(0, 0, 0);		
-	}
-	
-	/**
-	 * This will set the used pad values in the labels.
-	 * @param p
-	 * @param a
-	 * @param d
-	 */
-	public void setPAD(double p, double a, double d)
-	{
-		String sp = padFormat.format(p);
-		String sa = padFormat.format(a);
-		String sd = padFormat.format(d);
-		
-		plabel.setText("p: " + sp);
-		alabel.setText("a: " + sa);
-		dlabel.setText("d: " + sd);
 	}
 	
 	public AffectButton getAffectButton()
@@ -128,13 +119,13 @@ public class MeasurementPanel extends JPanel
 		return this.afbutton;
 	}
 	
-	public JButton getSynthesizeButton()
+	public JButton getContinueButton()
 	{
-		return this.synthesizeButton;
+		return this.continueButton;
 	}
 	
 	public String getInsertedText()
 	{
-		return this.textarea.getText();
+		return this.inputArea.getText();
 	}
 }

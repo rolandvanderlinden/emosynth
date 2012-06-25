@@ -41,29 +41,10 @@ public class MeasurementController implements ActionListener
 			double p = abae.getPleasure();
 			double a = abae.getArousal();
 			double d = abae.getDominance();
-			
-			//-1 pleasure is very low pitch
-			//1 pleasure is higher pitch
-			double ppercentage = (p + 1) / 2.0;
-			float pitch = 80 + (float)(ppercentage * 100);
-
-			//-1 arousal is very slow speech
-			//1 arousal is faster speech
-			double apercentage = (a + 1) / 2.0;
-			float rate = 150 + (float)(apercentage * 100);
-			
-			//-1 dominance is very soft speech
-			//1 dominance is louder speech
-			double dpercentage = (d + 1) / 2.0;
-			float volume = 0.7f + (float)(dpercentage * 0.3);
-			
-			panel.setPAD(p, a, d);
-			speaker.setPitch(pitch);
-			speaker.setWordsPM(rate);
-			speaker.setVolume(volume);
+			//TODO
 		}
 		//Synthesize the text from the textarea.
-		else if(ae.getSource().equals(panel.getSynthesizeButton()))
+		else if(ae.getSource().equals(panel.getContinueButton()))
 		{
 			String text = panel.getInsertedText();
 			if(text.length() == 0)

@@ -71,7 +71,7 @@ public class MeasurementApplet extends JApplet
 		
 		//Create the prototypePanel
 		VectorF2 psize = new VectorF2(0.8f * width, 0.8f * height);
-		VectorF2 ppos = new VectorF2(0.1f * width, 0.015f * height);
+		VectorF2 ppos = new VectorF2(0.1f * width, 0.1f * height);
 		MeasurementPanel measurementPanel = new MeasurementPanel(psize);
 		measurementPanel.setLocation((int)ppos.x, (int)ppos.y);
 		this.rootpanel.add(measurementPanel);

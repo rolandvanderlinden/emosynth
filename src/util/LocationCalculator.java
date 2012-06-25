@@ -6,7 +6,7 @@ public class LocationCalculator
 {
 	public enum LocationType
 	{
-		BEGIN, ONE_EIGHTH, ONE_QUARTER, ONE_THIRD, CENTER, TWO_THIRDS, THREE_QUARTERS, SEVEN_EIGHTHS, END,
+		BEGIN, ONE_EIGHTH, ONE_QUARTER, ONE_THIRD, THREE_EIGHTS, CENTER, FIVE_EIGHTS, TWO_THIRDS, THREE_QUARTERS, SEVEN_EIGHTHS, END,
 	}
 	
 
@@ -81,24 +81,33 @@ public class LocationCalculator
 				result = 0.5f - ratioDiff;
 				break;
 			
-			case ONE_EIGHTH:
-				result = 0.125f - ratioDiff;
-				break;
 			case ONE_QUARTER:
 				result = 0.25f - ratioDiff;
 				break;
+			case THREE_QUARTERS:
+				result = 0.75f - ratioDiff;
+				break;
+
 			case ONE_THIRD:
 				result = (1f / 3f) - ratioDiff;
 				break;
 			case TWO_THIRDS:
 				result = (2f / 3f) - ratioDiff;
 				break;
-			case THREE_QUARTERS:
-				result = 0.75f - ratioDiff;
+				
+			case ONE_EIGHTH:
+				result = 0.125f - ratioDiff;
+				break;
+			case THREE_EIGHTS:
+				result = 0.375f - ratioDiff;
+				break;
+			case FIVE_EIGHTS:
+				result = 0.625f - ratioDiff;
 				break;
 			case SEVEN_EIGHTHS:
 				result = 0.875f - ratioDiff;
 				break;
+				
 			default: throw new UnsupportedOperationException();
 		}
 		
@@ -124,24 +133,33 @@ public class LocationCalculator
 				result = 0.5f - ratioDiff;
 				break;
 			
-			case ONE_EIGHTH:
-				result = 0.125f - ratioDiff;
-				break;
-			case ONE_QUARTER:
-				result = 0.25f - ratioDiff;
-				break;
 			case ONE_THIRD:
 				result = (1f / 3f) - ratioDiff;
 				break;
 			case TWO_THIRDS:
 				result = (2f / 3f) - ratioDiff;
 				break;
+				
+			case ONE_QUARTER:
+				result = 0.25f - ratioDiff;
+				break;
 			case THREE_QUARTERS:
 				result = 0.75f - ratioDiff;
+				break;
+
+			case ONE_EIGHTH:
+				result = 0.125f - ratioDiff;
+				break;
+			case THREE_EIGHTS:
+				result = 0.375f - ratioDiff;
+				break;
+			case FIVE_EIGHTS:
+				result = 0.625f - ratioDiff;
 				break;
 			case SEVEN_EIGHTHS:
 				result = 0.875f - ratioDiff;
 				break;
+				
 			default: throw new UnsupportedOperationException();
 		}
 		
