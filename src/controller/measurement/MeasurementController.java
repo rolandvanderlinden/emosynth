@@ -1,12 +1,11 @@
-package controller.prototype;
+package controller.measurement;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import org.tudelft.affectbutton.AffectButtonActionEvent;
 
-import view.prototype.PrototypePanel;
-import view.test.ButtonTextPanel;
+import view.measurement.MeasurementPanel;
 import applicationtest.TestConfig;
 
 import com.sun.speech.freetts.Voice;
@@ -14,12 +13,12 @@ import com.sun.speech.freetts.VoiceManager;
 
 import controller.tts.Speaker;
 
-public class PrototypePanelController implements ActionListener
+public class MeasurementController implements ActionListener
 {
-	private PrototypePanel panel;
+	private MeasurementPanel panel;
 	private Speaker speaker;
 	
-	public PrototypePanelController(PrototypePanel panel)
+	public MeasurementController(MeasurementPanel panel)
 	{
 		super();
 		

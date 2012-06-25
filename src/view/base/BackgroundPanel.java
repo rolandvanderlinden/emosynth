@@ -1,15 +1,15 @@
-package view.prototype;
+package view.base;
 
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import content.Content;
-
 import model.util.VectorF2;
 import view.components.TranslucentBufferedImageJPanel;
 import applicationprototype.PrototypeConfig;
+import content.Content;
 
 public class BackgroundPanel extends JPanel
 {
@@ -18,7 +18,6 @@ public class BackgroundPanel extends JPanel
 	// **********************************************
 	
 	private TranslucentBufferedImageJPanel fullbackground, leftPanel, rightPanel, upPanel, lowPanel, controlsPanel;
-	private PrototypePanel prototypePanel;
 	private JPanel leborder, uborder, rborder, loborder, lebar, ubar, rbar, lobar;
 	private JLabel createdLabel;
 	
@@ -26,27 +25,27 @@ public class BackgroundPanel extends JPanel
 	// Constructor & init
 	// **********************************************
 	
-	public BackgroundPanel()
+	public BackgroundPanel(Dimension size, int outerbordersize)
 	{
 		super();
 		
-		this.init();
+		this.init(size, outerbordersize);
 	}
 	
-	private void init()
+	private void init(Dimension size, int outerbordersize)
 	{
 		//Create this screen itself.
 		this.setLayout(null);
-		this.setSize(PrototypeConfig.appsize);
+		this.setSize(size);
 		this.setBackground(Color.white);
 		this.setOpaque(false);
 		
 		//Define the sizes that we'll use for the gui.
 		int leftsize = 16;
 		int rightsize = 16;
-		int topsize = 80;
-		int bottomsize = 130;
-		int bordersize = PrototypeConfig.outerBorderSize;
+		int topsize = 16;
+		int bottomsize = 16;
+		int bordersize = outerbordersize;
 		int width = this.getWidth();
 		int height = this.getHeight();
 	
@@ -135,12 +134,6 @@ public class BackgroundPanel extends JPanel
 		this.add(rightPanel);
 		this.add(upPanel);
 		this.add(lowPanel);
-		
-		//Create the prototypePanel
-		VectorF2 ppsize = new VectorF2(width - leftsize - rightsize - (2*bordersize), height - topsize - bottomsize - (2*bordersize));
-		this.prototypePanel = new PrototypePanel(ppsize);
-		this.prototypePanel.setLocation(bordersize + leftsize, bordersize + topsize);
-		this.add(this.prototypePanel);
 
 		//Create the fullbackground
 		this.fullbackground = new TranslucentBufferedImageJPanel(Content.background, 1);

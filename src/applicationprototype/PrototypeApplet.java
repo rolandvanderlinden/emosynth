@@ -4,11 +4,11 @@ import java.awt.Color;
 
 import javax.swing.JApplet;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
+import model.util.VectorF2;
 import util.Output;
-import view.prototype.BackgroundPanel;
-import view.prototype.BackgroundPanel;
+import view.base.BackgroundPanel;
+import view.prototype.PrototypePanel;
 
 public class PrototypeApplet extends JApplet
 {
@@ -69,7 +69,14 @@ public class PrototypeApplet extends JApplet
 		int width = this.rootpanel.getWidth();
 		int height = this.rootpanel.getHeight();
 
-		BackgroundPanel backgroundPanel = new BackgroundPanel();
+		//Create the prototypePanel
+		VectorF2 psize = new VectorF2(0.8f * width, 0.8f * height);
+		VectorF2 ppos = new VectorF2(0.1f * width, 0.015f * height);
+		PrototypePanel prototypePanel = new PrototypePanel(psize);
+		prototypePanel.setLocation((int)ppos.x, (int)ppos.y);
+		this.rootpanel.add(prototypePanel);
+		
+		BackgroundPanel backgroundPanel = new BackgroundPanel(PrototypeConfig.appsize, PrototypeConfig.outerBorderSize);
 		this.rootpanel.add(backgroundPanel);
 	}
 	

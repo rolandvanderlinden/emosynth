@@ -1,4 +1,4 @@
-package view.prototype;
+package view.measurement;
 
 import java.awt.Color;
 import java.text.DecimalFormat;
@@ -16,11 +16,12 @@ import org.tudelft.affectbutton.AffectButton;
 import util.LocationCalculator;
 import util.LocationCalculator.LocationType;
 import util.SizeCalculator;
+import controller.measurement.MeasurementController;
 import controller.prototype.PrototypeController;
 
-public class PrototypePanel extends JPanel
+public class MeasurementPanel extends JPanel
 {
-	protected PrototypeController controller;
+	protected MeasurementController controller;
 	
 	protected AffectButton afbutton;
 	protected JButton synthesizeButton;
@@ -30,7 +31,7 @@ public class PrototypePanel extends JPanel
 	protected JLabel plabel, alabel, dlabel;
 	private DecimalFormat padFormat;
 	
-	public PrototypePanel(VectorF2 size)
+	public MeasurementPanel(VectorF2 size)
 	{
 		super();
 		
@@ -39,7 +40,7 @@ public class PrototypePanel extends JPanel
 	
 	private void initialize(int width, int height)
 	{
-		this.controller = new PrototypeController(this);
+		this.controller = new MeasurementController(this);
 		this.padFormat = new DecimalFormat("0.000");
 		
 		this.setLayout(null);
