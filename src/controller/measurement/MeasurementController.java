@@ -7,6 +7,7 @@ import java.util.Random;
 
 import model.pad.PADSettings;
 import model.speech.SpeechSettings;
+import model.speech.SpeechToPAD;
 
 import org.tudelft.affectbutton.AffectButton;
 import org.tudelft.affectbutton.AffectButtonActionEvent;
@@ -19,6 +20,7 @@ import applicationtest.TestConfig;
 import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
 
+import controller.io.FileIOController;
 import controller.tts.Speaker;
 
 public class MeasurementController implements ActionListener
@@ -68,7 +70,7 @@ public class MeasurementController implements ActionListener
 	 */
 	private void saveConversion()
 	{
-		
+		FileIOController.Instance().writeToFile(new SpeechToPAD(this.speechSettings, this.padSettings));
 	}
 	
 	/**

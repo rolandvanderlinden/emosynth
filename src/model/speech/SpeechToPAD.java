@@ -14,4 +14,10 @@ public class SpeechToPAD
 		this.speechSettings = speechSettings;
 		this.padSettings = padSettings;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "TODO";
+	}
 }
