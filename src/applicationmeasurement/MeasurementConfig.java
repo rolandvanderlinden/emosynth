@@ -17,6 +17,8 @@ public class MeasurementConfig
 	
 	public final static long waitTimeForNextTest = 1000;
 	
+	public final static String standardExperimentText = "Hello there. Try to guess my affective state. I get a new random affective state each time you continue or skip."
+;	
 	public final static String explanatoryText = 
 			"Dear participant,\n"
 			+ "We would like you to listen to the affective state (the emotion) of the synthetic voice, and then indicate which affective state you recognized by selecting the associated facial expression on the affectbutton."

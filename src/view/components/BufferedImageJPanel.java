@@ -31,6 +31,20 @@ public class BufferedImageJPanel extends AImageJPanel
 		super(imageInfo);
 	}
 	
+	/**
+	 * This constructs the imagepanel with a custom image.
+	 * 
+	 * @param imageFile
+	 */
+	public BufferedImageJPanel(BufferedImage bi, int fakeint)
+	{
+		super(null);
+		
+		//TODO fakeint to overcome problem with ambiguous constructor.
+		
+		bufferedImage = bi;
+	}
+	
 	// *************************
 	// Draw
 	// *************************
@@ -54,6 +68,15 @@ public class BufferedImageJPanel extends AImageJPanel
 	// ********************
 	// Image
 	// ********************
+	
+	/**
+	 * Set a new bufferedImage.
+	 * @param image
+	 */
+	public void setBufferedImage(BufferedImage image)
+	{
+		this.bufferedImage = image;
+	}
 	
 	/**
 	 * This sets the imagefile to a new one. If the given imageInfo is incorrect,
