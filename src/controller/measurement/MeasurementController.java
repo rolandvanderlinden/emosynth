@@ -1,9 +1,12 @@
 package controller.measurement;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.util.Random;
+
+import model.pad.PADSettings;
+import model.speech.SpeechSettings;
 
 import org.tudelft.affectbutton.AffectButton;
 import org.tudelft.affectbutton.AffectButtonActionEvent;
@@ -23,8 +26,11 @@ public class MeasurementController implements ActionListener
 	private MeasurementPanel panel;
 	private Speaker affectiveSpeaker;
 	private Speaker neutralSpeaker;
+
+	private SpeechSettings speechSettings;
+	private PADSettings padSettings;
 	
-	private double currentP, currentA, currentD;
+	private Random random;
 	private int testsSaved;
 	private int testsTotal;
 	
@@ -34,51 +40,94 @@ public class MeasurementController implements ActionListener
 		
 		this.panel = panel;
 		
+		this.random = new Random();
+		
+		//Initiate the speakers.
 		Voice affectiveVoice = VoiceManager.getInstance().getVoice(TestConfig.freeTTSSpeakerName);
 		affectiveSpeaker = new Speaker(TestConfig.freeTTSSpeakerName, affectiveVoice);
 		Voice neutralVoice = VoiceManager.getInstance().getVoice(TestConfig.freeTTSSpeakerName);
 		neutralSpeaker = new Speaker(TestConfig.freeTTSSpeakerName, neutralVoice);
+		
+		this.speechSettings = new SpeechSettings(0,0,0,0);
+		this.padSettings = new PADSettings(0,0,0);
 	}
 	
+	private void start()
+	{
+		setRandomAffectiveState();
+		
+		//Say that the new affective text will now be spoken.
+		speakText(neutralSpeaker, "Started. Pay attention to the new affective state.");
+		waitMS(MeasurementConfig.waitTimeForNextTest);
+		//Speak with the new affective state.
+		speakTextFromInputArea(affectiveSpeaker);
+	}
+	
+	/**
+	 * Save the conversion from speech to PAD to file.
+	 */
 	private void saveConversion()
 	{
 		
 	}
 	
+	/**
+	 * Create a new random affective state for the speaker.
+	 */
 	private void setRandomAffectiveState()
 	{
-		//TODO
+		//TODO correct random values.
+		float pitch = (float)(50 + (random.nextDouble() * 250));
+		float pitchrange = (float)(1 + (random.nextDouble() * 49));
+		float wordspm = (float)(80 + (random.nextDouble() * 170));
+		float volume = (float)(0.85 + (random.nextDouble() * 0.15));
+		
+		this.affectiveSpeaker.setPitch(pitch);
+		this.affectiveSpeaker.setPitchRange(pitchrange);
+		this.affectiveSpeaker.setWordsPM(wordspm);
+		this.affectiveSpeaker.setVolume(volume);
+		
+		this.speechSettings = new SpeechSettings(pitch, pitchrange, wordspm, volume);
 	}
 	
+	/**
+	 * Remove the saved selected state of the AB.
+	 */
 	private void resetSelectedAffectiveState()
 	{
 		panel.getButtonStateImagePanel().setBufferedImage(null);
 	}
 	
+	/**
+	 * Take the current state of the AB and paint it on another image.
+	 */
 	private void extractAffectButtonImage()
 	{
 		AffectButton ab = panel.getAffectButton();
-		Dimension oldABSize = ab.getSize();
 		
-		//Make sure the button is just as big as the panel in which the image needs to go (to reduce artefacts).
-		ab.setSize(panel.getButtonStateImagePanel().getSize());
-		//Write the current state of the ab to a new image.
+		//Write the current state of the AB to a new image.
 		BufferedImage bimage = new BufferedImage(ab.getWidth(), ab.getHeight(), BufferedImage.TYPE_INT_RGB);
 		ab.paint(bimage.getGraphics());
 		
-		//Put the ab back to its old size.
-		ab.setSize(oldABSize);
-		
-		//Put the image in the panel that shows the abstate.
+		//Put the image in the panel that shows the AB-state.
 		panel.getButtonStateImagePanel().setBufferedImage(bimage);
 	}
 	
+	/**
+	 * Let the given speaker say the given words.
+	 * @param speaker
+	 * @param text
+	 */
 	private void speakText(Speaker speaker, String text)
 	{		
 		if(speaker != null)
 			speaker.say(text);
 	}
 	
+	/**
+	 * Let the given speaker say the words that are on the input area.
+	 * @param speaker
+	 */
 	private void speakTextFromInputArea(Speaker speaker)
 	{
 		String text = panel.getInsertedText();
@@ -89,6 +138,10 @@ public class MeasurementController implements ActionListener
 			speaker.say(text);
 	}
 	
+	/**
+	 * Make sure this thread waits the given amount of ms.
+	 * @param ms
+	 */
 	private void waitMS(long ms)
 	{
 		try
@@ -111,18 +164,31 @@ public class MeasurementController implements ActionListener
 		//Make sure the continuebutton is turned on.
 		if(ae.getSource().equals(panel.getAffectButton()))
 		{
+			//Extract the PAD values from the AB.
 			AffectButtonActionEvent abae = (AffectButtonActionEvent)ae;
-			currentP = abae.getPleasure();
-			currentA = abae.getArousal();
-			currentD = abae.getDominance();
-			//TODO
+			this.padSettings = new PADSettings((float)abae.getPleasure(), (float)abae.getArousal(), (float)abae.getDominance());
 			
+			//Extract an image of the current state of the button.
 			extractAffectButtonImage();
 			
 			//Make sure the user can now save & continue.
 			panel.getContinueButton().setEnabled(true);
 		}
 
+		//Start the first test.
+		else if(ae.getSource().equals(panel.getStartButton()))
+		{
+			panel.getStartButton().setVisible(false);
+			panel.getStartButton().setEnabled(false);
+			
+			panel.getAffectButton().setEnabled(true);
+			panel.getNeutralButton().setEnabled(true);
+			panel.getRepeatButton().setEnabled(true);
+			panel.getSkipButton().setEnabled(true);
+			
+			start();
+		}
+		
 		//Save the conversion and continue to the next sample.
 		//Turn off the continuebutton.
 		else if(ae.getSource().equals(panel.getContinueButton()))

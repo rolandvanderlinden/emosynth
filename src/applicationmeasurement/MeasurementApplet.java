@@ -16,8 +16,9 @@ public class MeasurementApplet extends JApplet
 	// Fields
 	// **********************************************
 	
-	public JPanel rootpanel;
-	
+	protected JPanel rootpanel;
+	protected BackgroundPanel backgroundPanel;
+	protected MeasurementPanel measurementPanel;
 	
 	// **********************************************
 	// init
@@ -72,11 +73,11 @@ public class MeasurementApplet extends JApplet
 		//Create the prototypePanel
 		VectorF2 psize = new VectorF2(0.8f * width, 0.8f * height);
 		VectorF2 ppos = new VectorF2(0.1f * width, 0.1f * height);
-		MeasurementPanel measurementPanel = new MeasurementPanel(psize);
-		measurementPanel.setLocation((int)ppos.x, (int)ppos.y);
+		this.measurementPanel = new MeasurementPanel(psize);
+		this.measurementPanel.setLocation((int)ppos.x, (int)ppos.y);
 		this.rootpanel.add(measurementPanel);
 		
-		BackgroundPanel backgroundPanel = new BackgroundPanel(MeasurementConfig.appsize, MeasurementConfig.outerBorderSize);
+		this.backgroundPanel = new BackgroundPanel(MeasurementConfig.appsize, MeasurementConfig.outerBorderSize);
 		this.rootpanel.add(backgroundPanel);
 	}
 	
