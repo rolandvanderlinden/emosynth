@@ -7,19 +7,18 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import view.test.SliderTextPanel;
 import applicationtest.TestConfig;
 
 import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
 
-import view.test.SliderTextPanel;
-import controller.tts.MainSpeaker;
 import controller.tts.Speaker;
 
 public class SliderTextController implements ActionListener, ChangeListener
 {
 	private SliderTextPanel panel;
-	private Speaker speaker;
+	public Speaker speaker;
 	
 	public SliderTextController(SliderTextPanel panel)
 	{

@@ -1,7 +1,5 @@
 package view.test;
 
-import java.awt.Color;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -13,7 +11,6 @@ import util.LocationCalculator;
 import util.LocationCalculator.LocationType;
 import util.SizeCalculator;
 import controller.test.SliderTextController;
-import controller.tts.MainSpeaker;
 
 public class SliderTextPanel extends AMainPanel
 {
@@ -122,7 +119,7 @@ public class SliderTextPanel extends AMainPanel
 		this.add(this.volLabel);
 		
 		//Slider
-		pitchSlider = new JSlider(JSlider.HORIZONTAL, PITCH_MIN, PITCH_MAX, (int)MainSpeaker.Instance().getPitch());
+		pitchSlider = new JSlider(JSlider.HORIZONTAL, PITCH_MIN, PITCH_MAX, (int)controller.speaker.getPitch());
 		pitchSlider.setSize((int)slidersize.x, (int)slidersize.y);
 		pitchSlider.setLocation((int)pitchlocation.x, (int)pitchlocation.y);
 		pitchSlider.setMajorTickSpacing(100);
@@ -132,7 +129,7 @@ public class SliderTextPanel extends AMainPanel
 		pitchSlider.addChangeListener(controller);
 		this.add(pitchSlider);
 		pitchshiftSlider = new JSlider(JSlider.HORIZONTAL, PITCHSHIFT_MIN, PITCHSHIFT_MAX, 
-				(int)(PITCHSHIFT_MIN + (MainSpeaker.Instance().getPitchShift() / 10.0) * (PITCHSHIFT_MAX - PITCHSHIFT_MIN)));
+				(int)(PITCHSHIFT_MIN + (controller.speaker.getPitchShift() / 10.0) * (PITCHSHIFT_MAX - PITCHSHIFT_MIN)));
 		pitchshiftSlider.setSize((int)slidersize.x, (int)slidersize.y);
 		pitchshiftSlider.setLocation((int)pitchslocation.x, (int)pitchslocation.y);
 		pitchshiftSlider.setMajorTickSpacing(20);
@@ -141,7 +138,7 @@ public class SliderTextPanel extends AMainPanel
 		pitchshiftSlider.setPaintLabels(true);
 		pitchshiftSlider.addChangeListener(controller);
 		this.add(pitchshiftSlider);
-		pitchrangeSlider = new JSlider(JSlider.HORIZONTAL, PITCHRANGE_MIN, PITCHRANGE_MAX, (int)MainSpeaker.Instance().getPitchRange());
+		pitchrangeSlider = new JSlider(JSlider.HORIZONTAL, PITCHRANGE_MIN, PITCHRANGE_MAX, (int)controller.speaker.getPitchRange());
 		pitchrangeSlider.setSize((int)slidersize.x, (int)slidersize.y);
 		pitchrangeSlider.setLocation((int)pitchrlocation.x, (int)pitchrlocation.y);
 		pitchrangeSlider.setMajorTickSpacing(100);
@@ -150,7 +147,7 @@ public class SliderTextPanel extends AMainPanel
 		pitchrangeSlider.setPaintLabels(true);
 		pitchrangeSlider.addChangeListener(controller);
 		this.add(pitchrangeSlider);
-		wordspmSlider = new JSlider(JSlider.HORIZONTAL, WORDSPM_MIN, WORDSPM_MAX, (int)MainSpeaker.Instance().getWordsPM());
+		wordspmSlider = new JSlider(JSlider.HORIZONTAL, WORDSPM_MIN, WORDSPM_MAX, (int)controller.speaker.getWordsPM());
 		wordspmSlider.setSize((int)slidersize.x, (int)slidersize.y);
 		wordspmSlider.setLocation((int)wordslocation.x, (int)wordslocation.y);
 		wordspmSlider.setMajorTickSpacing(30);
@@ -160,7 +157,7 @@ public class SliderTextPanel extends AMainPanel
 		wordspmSlider.addChangeListener(controller);
 		this.add(this.wordspmSlider);
 		durstretchSlider = new JSlider(JSlider.HORIZONTAL, DURSTRETCH_MIN, DURSTRETCH_MAX, 
-				(int)(DURSTRETCH_MIN + (MainSpeaker.Instance().getDurationStretch() / 10.0) * (DURSTRETCH_MAX - DURSTRETCH_MIN)));
+				(int)(DURSTRETCH_MIN + (controller.speaker.getDurationStretch() / 10.0) * (DURSTRETCH_MAX - DURSTRETCH_MIN)));
 		durstretchSlider.setSize((int)slidersize.x, (int)slidersize.y);
 		durstretchSlider.setLocation((int)durslocation.x, (int)durslocation.y);
 		durstretchSlider.setMajorTickSpacing(20);
@@ -170,7 +167,7 @@ public class SliderTextPanel extends AMainPanel
 		durstretchSlider.addChangeListener(controller);
 		this.add(this.durstretchSlider);
 		volSlider = new JSlider(JSlider.HORIZONTAL, VOL_MIN, VOL_MAX, 
-				(int)(VOL_MIN + MainSpeaker.Instance().getVolume() * (VOL_MAX - VOL_MIN)));
+				(int)(VOL_MIN + controller.speaker.getVolume() * (VOL_MAX - VOL_MIN)));
 		volSlider.setSize((int)slidersize.x, (int)slidersize.y);
 		volSlider.setLocation((int)vollocation.x, (int)vollocation.y);
 		volSlider.setMajorTickSpacing(20);

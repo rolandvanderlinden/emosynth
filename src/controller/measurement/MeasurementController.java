@@ -50,7 +50,7 @@ public class MeasurementController implements ActionListener
 		Voice neutralVoice = VoiceManager.getInstance().getVoice(TestConfig.freeTTSSpeakerName);
 		neutralSpeaker = new Speaker(TestConfig.freeTTSSpeakerName, neutralVoice);
 		
-		this.speechSettings = new SpeechSettings(0,0,0,0);
+		this.speechSettings = new SpeechSettings(0,0,0);
 		this.padSettings = new PADSettings(0,0,0);
 	}
 	
@@ -82,14 +82,12 @@ public class MeasurementController implements ActionListener
 		float pitch = (float)(50 + (random.nextDouble() * 250));
 		float pitchrange = (float)(1 + (random.nextDouble() * 49));
 		float wordspm = (float)(80 + (random.nextDouble() * 170));
-		float volume = (float)(0.85 + (random.nextDouble() * 0.15));
 		
 		this.affectiveSpeaker.setPitch(pitch);
 		this.affectiveSpeaker.setPitchRange(pitchrange);
 		this.affectiveSpeaker.setWordsPM(wordspm);
-		this.affectiveSpeaker.setVolume(volume);
 		
-		this.speechSettings = new SpeechSettings(pitch, pitchrange, wordspm, volume);
+		this.speechSettings = new SpeechSettings(pitch, pitchrange, wordspm);
 	}
 	
 	/**

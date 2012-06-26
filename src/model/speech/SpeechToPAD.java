@@ -18,6 +18,7 @@ public class SpeechToPAD
 	@Override
 	public String toString()
 	{
-		return "TODO";
+		return speechSettings.pitch + ", " + speechSettings.pitchrange + ", " + speechSettings.wordspm + ", "
+				+ padSettings.p + ", " + padSettings.a + ", " + padSettings.d + ";";
 	}
 }

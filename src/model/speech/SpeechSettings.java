@@ -2,20 +2,19 @@ package model.speech;
 
 public class SpeechSettings
 {
-	public float pitch, pitchrange, wordspm, volume;
+	public float pitch, pitchrange, wordspm;
 	
-	public SpeechSettings(float pitch, float pitchrange, float wordspm, float volume)
+	public SpeechSettings(float pitch, float pitchrange, float wordspm)
 	{
 		super();
 		
 		this.pitch = pitch;
 		this.pitchrange = pitchrange;
 		this.wordspm = wordspm;
-		this.volume = volume;
 	}
 	
 	public SpeechSettings clone()
 	{
-		return new SpeechSettings(pitch, pitchrange, wordspm, volume);
+		return new SpeechSettings(pitch, pitchrange, wordspm);
 	}
 }
