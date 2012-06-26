@@ -2,6 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="libs/affectbutton.jar"/>
 	<classpathentry kind="lib" path="libs/cmu_time_awb.jar"/>
 	<classpathentry kind="lib" path="libs/cmu_us_kal.jar"/>
 	<classpathentry kind="lib" path="libs/cmudict04.jar"/>
@@ -11,6 +12,5 @@
 	<classpathentry kind="lib" path="libs/freetts-jsapi10.jar"/>
 	<classpathentry kind="lib" path="libs/freetts.jar"/>
 	<classpathentry kind="lib" path="libs/mbrola.jar"/>
-	<classpathentry kind="lib" path="libs/affectbutton.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
