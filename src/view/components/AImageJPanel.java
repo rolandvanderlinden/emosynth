@@ -4,11 +4,10 @@ package view.components;
 
 import javax.swing.JPanel;
 
-import content.img.ImageRef;
-
 import model.util.ResourceInfo;
 import model.util.Size;
 import util.Output;
+import content.img.ImageRef;
 
 /**
  * This is the base of all the imageJPanels that can be used in the applications.

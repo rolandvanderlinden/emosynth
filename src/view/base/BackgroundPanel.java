@@ -10,8 +10,8 @@ import javax.swing.JPanel;
 import model.util.VectorF2;
 import util.ComponentUtil;
 import util.LocationCalculator;
-import util.SizeCalculator;
 import util.LocationCalculator.LocationType;
+import util.SizeCalculator;
 import view.components.TranslucentBufferedImageJPanel;
 import content.Content;
 

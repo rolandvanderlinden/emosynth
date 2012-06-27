@@ -31,6 +31,7 @@ public class MeasurementController implements ActionListener
 	private Speaker neutralSpeaker;
 
 	private ArrayList<SpeechSettings> samples;
+	private ArrayList<SpeechToPAD> recordedDatapoints;
 	
 	private SpeechSettings speechSettings;
 	private PADSettings padSettings;
@@ -52,8 +53,10 @@ public class MeasurementController implements ActionListener
 		Voice neutralVoice = VoiceManager.getInstance().getVoice(TestConfig.freeTTSSpeakerName);
 		neutralSpeaker = new Speaker(TestConfig.freeTTSSpeakerName, neutralVoice);
 		
+		samples = new ArrayList<SpeechSettings>(MeasurementConfig.sampleSize);
+		recordedDatapoints = new ArrayList<SpeechToPAD>(MeasurementConfig.sampleSize);
+		
 		//Create all samples
-		samples = new ArrayList<SpeechSettings>();
 		for(float p : MeasurementConfig.pitchSettings)
 			for(float pr : MeasurementConfig.pitchRangeSettings)
 				for(float s : MeasurementConfig.speedSettings)
@@ -75,14 +78,6 @@ public class MeasurementController implements ActionListener
 		waitMS(MeasurementConfig.waitTimeForNextTest);
 		//Speak with the new affective state.
 		speakTextFromInputArea(affectiveSpeaker);
-	}
-	
-	/**
-	 * Save the conversion from speech to PAD to file.
-	 */
-	private void saveConversion()
-	{
-		FileIOController.Instance().writeToFile(new SpeechToPAD(this.speechSettings, this.padSettings));
 	}
 	
 	/**
@@ -186,31 +181,58 @@ public class MeasurementController implements ActionListener
 			panel.getNeutralButton().setEnabled(true);
 			panel.getRepeatButton().setEnabled(true);
 			
-			start();
+			this.start();
 		}
 		
 		//Save the conversion and continue to the next sample.
 		//Turn off the continuebutton.
 		else if(ae.getSource().equals(panel.getContinueButton()))
 		{
-			//Save the conversion to the file.
-			saveConversion();
-			//Set a new random affective state.
-			setRandomAffectiveState();
-			//Reset affectbutton & selected affective state.
-			panel.getButtonStateImagePanel().setBufferedImage(null);
+			//Save the conversion to the list.
+			recordedDatapoints.add(new SpeechToPAD(this.speechSettings, this.padSettings));
 			
-			//Increase the number of tests selected and the total
-			panel.setTestNumber(++this.testNumber);
-			
-			//Make sure the user needs to select an affective state before continuing.
-			panel.getContinueButton().setEnabled(false);
-			
-			//Say that the new affective text will now be spoken.
-			speakText(neutralSpeaker, "Saved. Pay attention to the new affective state.");
-			waitMS(MeasurementConfig.waitTimeForNextTest);
-			//Speak with the new affective state.
-			speakTextFromInputArea(affectiveSpeaker);
+			//If there are still samples to be tested, test it.
+			if(samples.size() > 0)
+			{
+				//Set a new random affective state.
+				setRandomAffectiveState();
+				//Reset affectbutton & selected affective state.
+				panel.getButtonStateImagePanel().setBufferedImage(null);
+				
+				//Increase the number of tests selected and the total
+				panel.setTestNumber(++this.testNumber);
+				
+				//Make sure the user needs to select an affective state before continuing.
+				panel.getContinueButton().setEnabled(false);
+				
+				//Say that the new affective text will now be spoken.
+				speakText(neutralSpeaker, "Saved. Pay attention to the new affective state.");
+				waitMS(MeasurementConfig.waitTimeForNextTest);
+				//Speak with the new affective state.
+				speakTextFromInputArea(affectiveSpeaker);
+			}
+			//Otherwise stop all activity and remove the components.
+			else
+			{
+				//Save all the recorded datapoints to file.
+				FileIOController.Instance().writeToFile(recordedDatapoints);
+				
+				//Present the user with a final view before exiting.
+				panel.setExplanation(MeasurementConfig.finishedText);				
+				
+				panel.getContinueButton().setVisible(false);
+				panel.getRepeatButton().setVisible(false);
+				panel.getNeutralButton().setVisible(false);
+				panel.getAffectButton().setVisible(false);
+				panel.getButtonStateImagePanel().setVisible(false);
+				panel.getInputScrollPane().setVisible(false);
+				
+				panel.getQuitButton().setEnabled(true);
+				panel.getQuitButton().setVisible(true);
+				
+				//Tell the user that he is finished.
+				speakText(neutralSpeaker, "Finished. Please send us your output file. Thank you for your participation.");
+			}
 		}
 		
 		//Repeat the affective state of the speaker.
@@ -227,6 +249,12 @@ public class MeasurementController implements ActionListener
 			//Say that the neutral voice will be used.
 			speakText(neutralSpeaker, "Neutral.");
 			speakTextFromInputArea(neutralSpeaker);
+		}
+		
+		//Quit the application.
+		else if(ae.getSource().equals(panel.getQuitButton()))
+		{
+			System.exit(0);
 		}
 		
 		//Button action undefined.

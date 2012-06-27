@@ -11,12 +11,6 @@ import view.test.AMainPanel;
 import view.test.ButtonTextPanel;
 import view.test.SliderTextPanel;
 
-
-import com.sun.speech.freetts.Voice;
-import com.sun.speech.freetts.VoiceManager;
-
-import controller.tts.Speaker;
-
 public class TestApplet extends JApplet
 {	
 	public JPanel rootpanel;

@@ -2,9 +2,8 @@ package content;
 
 import java.awt.Font;
 
-import content.img.ImageRef;
-
 import model.util.ResourceInfo;
+import content.img.ImageRef;
 
 public class Content
 {

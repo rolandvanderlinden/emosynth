@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import org.tudelft.affectbutton.AffectButtonActionEvent;
 
 import view.prototype.PrototypePanel;
-import view.test.ButtonTextPanel;
 import applicationtest.TestConfig;
 
 import com.sun.speech.freetts.Voice;

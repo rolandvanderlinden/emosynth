@@ -28,7 +28,7 @@ public class MeasurementPanel extends TranslucentBufferedImageJPanel
 	protected JTextArea explanationArea;
 	protected JScrollPane explanationScrollpane;
 	protected AffectButton afbutton;
-	protected JButton startButton, continueButton, repeatButton, neutralButton;
+	protected JButton startButton, continueButton, repeatButton, neutralButton, quitButton;
 	protected JTextArea inputArea;
 	protected JScrollPane inputScrollpane;
 	protected JLabel testsLabel;
@@ -54,7 +54,7 @@ public class MeasurementPanel extends TranslucentBufferedImageJPanel
 		VectorF2 afbuttonsize = SizeCalculator.calculateSize(new VectorF2(50, 50), new VectorF2(100, 100), holdersize, 0.33f, 0.33f, 1);
 		VectorF2 buttonsize = SizeCalculator.calculateSize(new VectorF2(160, 30), holdersize);
 		VectorF2 inputareasize = SizeCalculator.calculateSize(new VectorF2(100, 30), new VectorF2(500, 200), holdersize, 0.8f, 0.1f);
-		VectorF2 tlabelsize = SizeCalculator.calculateSize(new VectorF2(200, 20), holdersize);
+		VectorF2 tlabelsize = SizeCalculator.calculateSize(new VectorF2(135, 20), holdersize);
 		VectorF2 bsimagesize = SizeCalculator.calculateSize(new VectorF2(50, 50), new VectorF2(100, 100), holdersize, 0.2f, 0.2f, 1);
 		
 		//Locations
@@ -65,8 +65,9 @@ public class MeasurementPanel extends TranslucentBufferedImageJPanel
 		VectorF2 repeatbuttonpos = LocationCalculator.calculateLocation(buttonsize, holdersize, 0.75f, 0.825f);
 		VectorF2 neutralbuttonpos = LocationCalculator.calculateLocation(buttonsize, holdersize, 0.75f, 0.9f);
 		VectorF2 inputareapos = LocationCalculator.calculateLocation(inputareasize, holdersize, 0.05f, 0.85f);
-		VectorF2 tlabelpos = LocationCalculator.calculateLocation(tlabelsize, holdersize, 0.275f, 0.96f);
+		VectorF2 tlabelpos = LocationCalculator.calculateLocation(tlabelsize, holdersize, LocationType.CENTER, 0.96f);
 		VectorF2 bsimagepos = LocationCalculator.calculateLocation(bsimagesize, holdersize, 0.787f, 0.53f);
+		VectorF2 qbuttonpos = LocationCalculator.calculateLocation(buttonsize, holdersize, LocationType.CENTER, LocationType.THREE_QUARTERS);
 		
 		//Explanation TextArea
 		explanationArea = new JTextArea();
@@ -115,6 +116,13 @@ public class MeasurementPanel extends TranslucentBufferedImageJPanel
 		neutralButton.setEnabled(false);
 		neutralButton.setToolTipText("Repeat the test but now with a neutral affective voice.");
 		this.add(this.neutralButton);
+		quitButton = new JButton("Quit");
+		ComponentUtil.setComponentBounds(quitButton, buttonsize, qbuttonpos);
+		quitButton.addActionListener(controller);
+		quitButton.setEnabled(false);
+		quitButton.setVisible(false);
+		quitButton.setToolTipText("Quit the experiment. Thank you for participating.");
+		this.add(this.quitButton);
 		
 		//Insert TextArea
 		inputArea = new JTextArea();
@@ -145,9 +153,19 @@ public class MeasurementPanel extends TranslucentBufferedImageJPanel
 		this.setTestNumber(0);
 	}
 	
+	public void switchToEndVisuals()
+	{
+		
+	}
+	
 	public void setTestNumber(int num)
 	{
 		this.testsLabel.setText("Test number: " + num + " / " + MeasurementConfig.sampleSize);
+	}
+	
+	public void setExplanation(String text)
+	{
+		this.explanationArea.setText(text);
 	}
 	
 	public AffectButton getAffectButton()
@@ -183,5 +201,15 @@ public class MeasurementPanel extends TranslucentBufferedImageJPanel
 	public BufferedImageJPanel getButtonStateImagePanel()
 	{
 		return buttonStateImage;
+	}
+	
+	public JScrollPane getInputScrollPane()
+	{
+		return this.inputScrollpane;
+	}
+	
+	public JButton getQuitButton()
+	{
+		return this.quitButton;
 	}
 }

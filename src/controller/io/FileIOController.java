@@ -5,14 +5,14 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
 
 import model.speech.SpeechToPAD;
 import util.Output;
+import applicationmeasurement.MeasurementConfig;
 
 public class FileIOController
 {
-	private final static String filepath = "output.txt";
-	
 	private static FileIOController instance;
 	private Writer writer;
 	
@@ -20,7 +20,7 @@ public class FileIOController
 	{
 		try
 		{
-			this.writer = new BufferedWriter(new FileWriter(new File(filepath)));
+			this.writer = new BufferedWriter(new FileWriter(new File(MeasurementConfig.outputFilepath)));
 		}
 		catch(Exception e)
 		{
@@ -39,19 +39,19 @@ public class FileIOController
 		return instance;
 	}
 	
-	public void writeToFile(SpeechToPAD stp)
-	{
-		if(stp != null)
+	public void writeToFile(ArrayList<SpeechToPAD> stplist)
+	{		
+		try
 		{
-			try
-			{
+			for(SpeechToPAD stp : stplist)
 				writer.write(stp.toString() + "\n");
-				writer.flush();
-			}
-			catch (IOException e)
-			{
-				Output.showException(e);
-			}
+			
+			writer.flush();
+		}
+		catch (IOException e)
+		{
+			Output.showException(e);
 		}
 	}
+
 }

@@ -1,6 +1,5 @@
 package view.test;
 
-import java.awt.Color;
 import java.text.DecimalFormat;
 
 import javax.swing.JButton;
@@ -12,11 +11,10 @@ import model.util.VectorF2;
 
 import org.tudelft.affectbutton.AffectButton;
 
-import controller.test.ButtonTextController;
-
 import util.LocationCalculator;
 import util.LocationCalculator.LocationType;
 import util.SizeCalculator;
+import controller.test.ButtonTextController;
 
 
 public class ButtonTextPanel extends AMainPanel
