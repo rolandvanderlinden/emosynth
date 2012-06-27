@@ -33,7 +33,7 @@ public class Output
 	 * so we don't need to use the commandline tool to view it.
 	 * If made false, will not use or make the seperate window.
 	 */
-	private final static boolean showInSecondaryWindow = true;
+	private final static boolean showInSecondaryWindow = false;
 	/**
 	 * This boolean turns the class.method definition on in all output.
 	 */

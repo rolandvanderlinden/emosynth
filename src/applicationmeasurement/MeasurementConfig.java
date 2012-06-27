@@ -30,7 +30,7 @@ public class MeasurementConfig
 			"Dear participant,\n\n"
 			+ "We would like you to listen to the affective state (the emotion) of the synthetic voice, and then indicate which affective state you recognized by selecting the associated facial expression on the affectbutton."
 			+ "Please do not base your selection on the emotion contained in the words, but base it on the emotion contained in the speech itself.\n\n"
-			+ "When you press the 'Save & Continue' button, we will automatically save your result to a file. In order to process your results, we would like you to send this file to us when you are done."
+			+ "When you have finished all 27 tests, we will automatically save your results to a file. In order to process your results, we would like you to send this file to us when you are done."
 			+ "The file can be found in the location where you are running the program from. The filename is '" + outputFilepath + "'. Please send this file to '" + emailAddress + "'.\n\n"
 			+ "Some remarks to help you get started:\n"
 			+ " - Press the 'Start' button to start with the first test.\n"
