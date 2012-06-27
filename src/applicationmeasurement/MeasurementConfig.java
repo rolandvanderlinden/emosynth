@@ -31,5 +31,6 @@ public class MeasurementConfig
 			+ " - Press the 'Repeat test' button if you would like to hear the same voice again.\n"
 			+ " - Press the 'Compare with neutral' button if you would like to hear a (synthetic) affective neutral voice.\n"
 			+ " - Press the 'Skip (I don't know)' button if you cannot make an accurate selection at all. Use only when you are clueless.\n"
-			+ " - You can enter your own text in the textfield below if you prefer a change of topic (not necessary).\n";
+			+ " - You can enter your own text in the textfield below if you prefer a change of topic (not necessary).\n"
+			+ " - If you find it hard to select an affective state on the affectbutton; It does not record your selection if you move your mouse in between-mouse press and mouse-release.";
 }
