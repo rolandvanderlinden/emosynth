@@ -9,15 +9,15 @@ import java.awt.Dimension;
  */
 public class MeasurementConfig
 {
-	public final static String appname = "Affect Based Speech Synthesis";
+	public final static String appname = "Affect Based Speech Synthesis Measurement";
 	public final static Dimension appsize = new Dimension(1000, 750);
 	public final static int outerBorderSize = 2;
 	
-	public final static String freeTTSSpeakerName = "kevin16"; //Existing voices: alan, kevin8, kevin16
+	public final static String freeTTSSpeakerName = "kevin16"; 
 	
 	public final static long waitTimeForNextTest = 1000;
 	
-	public final static String standardExperimentText = "Hello there. Try to guess my affective state. I get a new random affective state each time you continue or skip.";
+	public final static String standardExperimentText = "A device made entirely with such gates will make calculations if everything moves forward.";
 	public final static String explanatoryText = 
 			"Dear participant,\n"
 			+ "We would like you to listen to the affective state (the emotion) of the synthetic voice, and then indicate which affective state you recognized by selecting the associated facial expression on the affectbutton."
@@ -30,7 +30,7 @@ public class MeasurementConfig
 			+ " - Press the 'Save & Continue' button if you think the selection fits with the affective state of the voice.\n"
 			+ " - Press the 'Repeat test' button if you would like to hear the same voice again.\n"
 			+ " - Press the 'Compare with neutral' button if you would like to hear a (synthetic) affective neutral voice.\n"
-			+ " - Press the 'Skip (I don't know)' button if you cannot make an accurate selection at all. Use only when you are clueless.\n"
-			+ " - You can enter your own text in the textfield below if you prefer a change of topic (not necessary).\n"
-			+ " - If you find it hard to select an affective state on the affectbutton; It does not record your selection if you move your mouse in between-mouse press and mouse-release.";
+			+ " - If you find it hard to select an affective state on the affectbutton; It does not record your selection if you move your mouse in between-mouse press and mouse-release.\n"
+			+ " - If you don't really recognize the affective state in the voice, please listen to it again and make the best guess you can. Please don't pick randomly.\n\n"
+			+ "This application makes use of the FreeTTS library and the AffectButton library";
 }

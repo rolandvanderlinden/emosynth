@@ -60,14 +60,14 @@ public class MeasurementPanel extends TranslucentBufferedImageJPanel
 		//Locations
 		VectorF2 explanationpos = LocationCalculator.calculateLocation(explanationsize, holdersize, LocationType.CENTER, 0.05f);
 		VectorF2 afbuttonpos = LocationCalculator.calculateLocation(afbuttonsize, holdersize, 0.32f, 0.55f);
-		VectorF2 startbuttonpos = LocationCalculator.calculateLocation(buttonsize, holdersize, 0.75f, 0.6f);
-		VectorF2 continuebuttonpos = LocationCalculator.calculateLocation(buttonsize, holdersize, 0.75f, 0.675f);
-		VectorF2 repeatbuttonpos = LocationCalculator.calculateLocation(buttonsize, holdersize, 0.75f, 0.75f);
-		VectorF2 neutralbuttonpos = LocationCalculator.calculateLocation(buttonsize, holdersize, 0.75f, 0.825f);
-		VectorF2 skipbuttonpos = LocationCalculator.calculateLocation(buttonsize, holdersize, 0.75f, 0.9f);
+		VectorF2 startbuttonpos = LocationCalculator.calculateLocation(buttonsize, holdersize, 0.75f, 0.675f);
+		VectorF2 continuebuttonpos = LocationCalculator.calculateLocation(buttonsize, holdersize, 0.75f, 0.75f);
+		VectorF2 repeatbuttonpos = LocationCalculator.calculateLocation(buttonsize, holdersize, 0.75f, 0.825f);
+		VectorF2 neutralbuttonpos = LocationCalculator.calculateLocation(buttonsize, holdersize, 0.75f, 0.9f);
+		VectorF2 skipbuttonpos = LocationCalculator.calculateLocation(buttonsize, holdersize, 0.75f, 0.975f);
 		VectorF2 inputareapos = LocationCalculator.calculateLocation(inputareasize, holdersize, 0.05f, 0.85f);
 		VectorF2 tlabelpos = LocationCalculator.calculateLocation(tlabelsize, holdersize, 0.275f, 0.96f);
-		VectorF2 bsimagepos = LocationCalculator.calculateLocation(bsimagesize, holdersize, 0.785f, 0.48f);
+		VectorF2 bsimagepos = LocationCalculator.calculateLocation(bsimagesize, holdersize, 0.787f, 0.53f);
 		
 		//Explanation TextArea
 		explanationArea = new JTextArea();
@@ -96,27 +96,31 @@ public class MeasurementPanel extends TranslucentBufferedImageJPanel
 		startButton = new JButton("Start");
 		ComponentUtil.setComponentBounds(startButton, buttonsize, startbuttonpos);
 		startButton.addActionListener(controller);
+		startButton.setToolTipText("Start the first test.");
 		this.add(this.startButton);
 		continueButton = new JButton("Save & Continue");
 		ComponentUtil.setComponentBounds(continueButton, buttonsize, continuebuttonpos);
 		continueButton.addActionListener(this.controller);
 		continueButton.setEnabled(false);
+		continueButton.setToolTipText("Save your selection and continue to the next test. That is only possible if you actually made a selection on the affectbutton.");
 		this.add(this.continueButton);
 		repeatButton = new JButton("Repeat test");
 		ComponentUtil.setComponentBounds(repeatButton, buttonsize, repeatbuttonpos);
 		repeatButton.addActionListener(this.controller);
 		repeatButton.setEnabled(false);
+		repeatButton.setToolTipText("Repeat the test with the same affective voice.");
 		this.add(this.repeatButton);
 		neutralButton = new JButton("Compare with neutral");
 		ComponentUtil.setComponentBounds(neutralButton, buttonsize, neutralbuttonpos);
 		neutralButton.addActionListener(this.controller);
 		neutralButton.setEnabled(false);
+		neutralButton.setToolTipText("Repeat the test but now with a neutral affective voice.");
 		this.add(this.neutralButton);
 		skipButton = new JButton("Skip (I don't know)");
 		ComponentUtil.setComponentBounds(skipButton, buttonsize, skipbuttonpos);
 		skipButton.addActionListener(this.controller);
 		skipButton.setEnabled(false);
-		this.add(this.skipButton);
+		//this.add(this.skipButton);
 		
 		//Insert TextArea
 		inputArea = new JTextArea();
@@ -124,6 +128,8 @@ public class MeasurementPanel extends TranslucentBufferedImageJPanel
 		inputArea.setLineWrap(true);
 		inputArea.setWrapStyleWord(true);
 		inputArea.setText(MeasurementConfig.standardExperimentText);
+		inputArea.setEditable(false);
+		inputArea.setToolTipText("This is the text that will be synthesized. For internal validity reasons, we do not allow you to change the text during the experiment.");
 		inputScrollpane = new JScrollPane(inputArea);
 		ComponentUtil.setComponentBounds(inputScrollpane, inputareasize, inputareapos);
 		inputScrollpane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -141,7 +147,6 @@ public class MeasurementPanel extends TranslucentBufferedImageJPanel
 		buttonStateImage = new BufferedImageJPanel(null, 0);
 		ComponentUtil.setComponentBounds(buttonStateImage, bsimagesize, bsimagepos);
 		this.add(buttonStateImage);
-		
 		
 		this.setTestsDone(0, 0);
 	}
