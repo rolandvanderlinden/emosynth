@@ -2,15 +2,15 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="libs/affectbutton.jar"/>
-	<classpathentry kind="lib" path="libs/cmu_time_awb.jar"/>
-	<classpathentry kind="lib" path="libs/cmu_us_kal.jar"/>
-	<classpathentry kind="lib" path="libs/cmudict04.jar"/>
-	<classpathentry kind="lib" path="libs/cmulex.jar"/>
-	<classpathentry kind="lib" path="libs/cmutimelex.jar"/>
-	<classpathentry kind="lib" path="libs/en_us.jar"/>
-	<classpathentry kind="lib" path="libs/freetts-jsapi10.jar"/>
-	<classpathentry kind="lib" path="libs/freetts.jar"/>
-	<classpathentry kind="lib" path="libs/mbrola.jar"/>
+	<classpathentry kind="lib" path="lib/affectbutton.jar"/>
+	<classpathentry kind="lib" path="lib/cmu_time_awb.jar"/>
+	<classpathentry kind="lib" path="lib/cmu_us_kal.jar"/>
+	<classpathentry kind="lib" path="lib/cmudict04.jar"/>
+	<classpathentry kind="lib" path="lib/cmulex.jar"/>
+	<classpathentry kind="lib" path="lib/cmutimelex.jar"/>
+	<classpathentry kind="lib" path="lib/en_us.jar"/>
+	<classpathentry kind="lib" path="lib/freetts-jsapi10.jar"/>
+	<classpathentry kind="lib" path="lib/freetts.jar"/>
+	<classpathentry kind="lib" path="lib/mbrola.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
