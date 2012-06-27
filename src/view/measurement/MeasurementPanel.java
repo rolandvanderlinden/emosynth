@@ -28,7 +28,7 @@ public class MeasurementPanel extends TranslucentBufferedImageJPanel
 	protected JTextArea explanationArea;
 	protected JScrollPane explanationScrollpane;
 	protected AffectButton afbutton;
-	protected JButton startButton, continueButton, skipButton, repeatButton, neutralButton;
+	protected JButton startButton, continueButton, repeatButton, neutralButton;
 	protected JTextArea inputArea;
 	protected JScrollPane inputScrollpane;
 	protected JLabel testsLabel;
@@ -64,7 +64,6 @@ public class MeasurementPanel extends TranslucentBufferedImageJPanel
 		VectorF2 continuebuttonpos = LocationCalculator.calculateLocation(buttonsize, holdersize, 0.75f, 0.75f);
 		VectorF2 repeatbuttonpos = LocationCalculator.calculateLocation(buttonsize, holdersize, 0.75f, 0.825f);
 		VectorF2 neutralbuttonpos = LocationCalculator.calculateLocation(buttonsize, holdersize, 0.75f, 0.9f);
-		VectorF2 skipbuttonpos = LocationCalculator.calculateLocation(buttonsize, holdersize, 0.75f, 0.975f);
 		VectorF2 inputareapos = LocationCalculator.calculateLocation(inputareasize, holdersize, 0.05f, 0.85f);
 		VectorF2 tlabelpos = LocationCalculator.calculateLocation(tlabelsize, holdersize, 0.275f, 0.96f);
 		VectorF2 bsimagepos = LocationCalculator.calculateLocation(bsimagesize, holdersize, 0.787f, 0.53f);
@@ -116,11 +115,6 @@ public class MeasurementPanel extends TranslucentBufferedImageJPanel
 		neutralButton.setEnabled(false);
 		neutralButton.setToolTipText("Repeat the test but now with a neutral affective voice.");
 		this.add(this.neutralButton);
-		skipButton = new JButton("Skip (I don't know)");
-		ComponentUtil.setComponentBounds(skipButton, buttonsize, skipbuttonpos);
-		skipButton.addActionListener(this.controller);
-		skipButton.setEnabled(false);
-		//this.add(this.skipButton);
 		
 		//Insert TextArea
 		inputArea = new JTextArea();
@@ -148,14 +142,13 @@ public class MeasurementPanel extends TranslucentBufferedImageJPanel
 		ComponentUtil.setComponentBounds(buttonStateImage, bsimagesize, bsimagepos);
 		this.add(buttonStateImage);
 		
-		this.setTestsDone(0, 0);
+		this.setTestNumber(0);
 	}
 	
-	public void setTestsDone(int saved, int total)
+	public void setTestNumber(int num)
 	{
-		this.testsLabel.setText("Tests saved & total: " + saved + " / " + total);
+		this.testsLabel.setText("Test number: " + num + " / " + MeasurementConfig.sampleSize);
 	}
-	
 	
 	public AffectButton getAffectButton()
 	{
@@ -180,11 +173,6 @@ public class MeasurementPanel extends TranslucentBufferedImageJPanel
 	public JButton getNeutralButton()
 	{
 		return this.neutralButton;
-	}
-	
-	public JButton getSkipButton()
-	{
-		return this.skipButton;
 	}
 
 	public String getInsertedText()

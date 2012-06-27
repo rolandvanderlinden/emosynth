@@ -3,6 +3,7 @@ package controller.measurement;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Random;
 
 import model.pad.PADSettings;
@@ -29,12 +30,13 @@ public class MeasurementController implements ActionListener
 	private Speaker affectiveSpeaker;
 	private Speaker neutralSpeaker;
 
+	private ArrayList<SpeechSettings> samples;
+	
 	private SpeechSettings speechSettings;
 	private PADSettings padSettings;
 	
 	private Random random;
-	private int testsSaved;
-	private int testsTotal;
+	private int testNumber;
 	
 	public MeasurementController(MeasurementPanel panel)
 	{
@@ -50,12 +52,22 @@ public class MeasurementController implements ActionListener
 		Voice neutralVoice = VoiceManager.getInstance().getVoice(TestConfig.freeTTSSpeakerName);
 		neutralSpeaker = new Speaker(TestConfig.freeTTSSpeakerName, neutralVoice);
 		
-		this.speechSettings = new SpeechSettings(0,0,0);
-		this.padSettings = new PADSettings(0,0,0);
+		//Create all samples
+		samples = new ArrayList<SpeechSettings>();
+		for(float p : MeasurementConfig.pitchSettings)
+			for(float pr : MeasurementConfig.pitchRangeSettings)
+				for(float s : MeasurementConfig.speedSettings)
+					samples.add(new SpeechSettings(p, pr, s));
 	}
 	
+	/**
+	 * Start up the measurementcontroller.
+	 */
 	private void start()
 	{
+		this.testNumber = 1;
+		panel.setTestNumber(testNumber);
+		
 		setRandomAffectiveState();
 		
 		//Say that the new affective text will now be spoken.
@@ -78,24 +90,13 @@ public class MeasurementController implements ActionListener
 	 */
 	private void setRandomAffectiveState()
 	{
-		//TODO correct random values.
-		float pitch = (float)(50 + (random.nextDouble() * 250));
-		float pitchrange = (float)(1 + (random.nextDouble() * 49));
-		float wordspm = (float)(80 + (random.nextDouble() * 170));
+		int randomIndex = random.nextInt(samples.size());
+		this.speechSettings = samples.get(randomIndex);
+		samples.remove(randomIndex);
 		
-		this.affectiveSpeaker.setPitch(pitch);
-		this.affectiveSpeaker.setPitchRange(pitchrange);
-		this.affectiveSpeaker.setWordsPM(wordspm);
-		
-		this.speechSettings = new SpeechSettings(pitch, pitchrange, wordspm);
-	}
-	
-	/**
-	 * Remove the saved selected state of the AB.
-	 */
-	private void resetSelectedAffectiveState()
-	{
-		panel.getButtonStateImagePanel().setBufferedImage(null);
+		this.affectiveSpeaker.setPitch(speechSettings.pitch);
+		this.affectiveSpeaker.setPitchRange(speechSettings.pitchrange);
+		this.affectiveSpeaker.setWordsPM(speechSettings.wordspm);
 	}
 	
 	/**
@@ -178,13 +179,12 @@ public class MeasurementController implements ActionListener
 		//Start the first test.
 		else if(ae.getSource().equals(panel.getStartButton()))
 		{
-			panel.getStartButton().setVisible(false);
 			panel.getStartButton().setEnabled(false);
+			panel.getStartButton().setVisible(false);
 			
 			panel.getAffectButton().setEnabled(true);
 			panel.getNeutralButton().setEnabled(true);
 			panel.getRepeatButton().setEnabled(true);
-			panel.getSkipButton().setEnabled(true);
 			
 			start();
 		}
@@ -198,12 +198,10 @@ public class MeasurementController implements ActionListener
 			//Set a new random affective state.
 			setRandomAffectiveState();
 			//Reset affectbutton & selected affective state.
-			resetSelectedAffectiveState();
+			panel.getButtonStateImagePanel().setBufferedImage(null);
 			
 			//Increase the number of tests selected and the total
-			this.testsSaved++;
-			this.testsTotal++;
-			panel.setTestsDone(testsSaved, testsTotal);
+			panel.setTestNumber(++this.testNumber);
 			
 			//Make sure the user needs to select an affective state before continuing.
 			panel.getContinueButton().setEnabled(false);
@@ -231,40 +229,13 @@ public class MeasurementController implements ActionListener
 			speakTextFromInputArea(neutralSpeaker);
 		}
 		
-		//Start the next sample without saving.
-		//Turn off the continuebutton.
-		else if(ae.getSource().equals(panel.getSkipButton()))
-		{
-			//Set a new random affective state.
-			setRandomAffectiveState();
-			//Reset affectbutton & selected affective state.
-			resetSelectedAffectiveState();
-			
-			//Increase the number of total tests
-			this.testsTotal++;
-			panel.setTestsDone(testsSaved, testsTotal);
-			
-			//Make sure the user needs to select an affective state before continuing.
-			panel.getContinueButton().setEnabled(false);
-			
-			//Say that the new affective text will now be spoken.
-			speakText(neutralSpeaker, "Skipped. Pay attention to the new affective state.");
-			waitMS(MeasurementConfig.waitTimeForNextTest);
-			//Speak with the new affective state.
-			speakTextFromInputArea(affectiveSpeaker);
-		}
-		
 		//Button action undefined.
 		else
 			throw new UnsupportedOperationException();
 		
+		
 		//Revalidate and repaint the panel.
 		panel.revalidate();
 		panel.repaint();
-	}
-	
-	public Speaker getAffectiveSpeaker()
-	{
-		return this.affectiveSpeaker;
 	}
 }

@@ -17,4 +17,10 @@ public class SpeechSettings
 	{
 		return new SpeechSettings(pitch, pitchrange, wordspm);
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "pitch = " + pitch + ", pitchrange = " + pitchrange + ", wordspm = " + wordspm;
+	}
 }
