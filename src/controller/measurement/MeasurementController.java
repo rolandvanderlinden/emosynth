@@ -93,7 +93,7 @@ public class MeasurementController implements ActionListener
 		this.affectiveSpeaker.setPitchRange(speechSettings.pitchrange);
 		this.affectiveSpeaker.setWordsPM(speechSettings.wordspm);
 		
-		Output.show(speechSettings.toString());
+		//Output.show(speechSettings.toString());
 	}
 	
 	/**
