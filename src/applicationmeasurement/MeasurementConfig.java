@@ -18,9 +18,9 @@ public class MeasurementConfig
 	public final static long waitTimeForNextTest = 1000;
 	
 	//Parameter settings.
-	public final static float[] pitchSettings = { 40, 80, 120 };
-	public final static float[] pitchRangeSettings = { 15, 30, 45 };
-	public final static float[] speedSettings = { 60, 120, 180 };
+	public final static float[] pitchSettings = { 60, 110, 160 };
+	public final static float[] pitchRangeSettings = { 5, 10, 15 };
+	public final static float[] speedSettings = { 80, 130, 180 };
 	public final static int sampleSize = pitchSettings.length * pitchRangeSettings.length * speedSettings.length;
 	
 	public final static String outputFilepath = "affect_output.txt";
