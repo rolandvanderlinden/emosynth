@@ -18,13 +18,13 @@ public class MeasurementConfig
 	public final static long waitTimeForNextTest = 1000;
 	
 	//Parameter settings.
-	public final static float[] pitchSettings = { 50, 120, 180 };
-	public final static float[] pitchRangeSettings = { 0, 30, 60 };
-	public final static float[] speedSettings = { 100, 160, 220 };
+	public final static float[] pitchSettings = { 40, 80, 120 };
+	public final static float[] pitchRangeSettings = { 15, 30, 45 };
+	public final static float[] speedSettings = { 60, 120, 180 };
 	public final static int sampleSize = pitchSettings.length * pitchRangeSettings.length * speedSettings.length;
 	
 	public final static String outputFilepath = "affect_output.txt";
-	public final static String emailAddress = "[TODO INSERT EMAILADDRESS]";
+	public final static String emailAddress = "aurimas@bavarskis.net";
 	public final static String standardExperimentText = "A device made entirely with such gates will make calculations if everything moves forward.";
 	public final static String explanatoryText = 
 			"Dear participant,\n\n"
